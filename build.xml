@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="deagan" default="jar" basedir=".">
+  <property name="classes-destination" location="bin" />
+  <property name="jars-destination"    location="." />
+
+  <path id="jars">
+    <fileset dir="lib" includes="*.jar" />
+  </path>
+
+  <!--== Targets =====================================================-->
+
+  <available file="/usr/bin/protoc" type="file" property="protoc" value="/usr/bin/protoc" />
+
+  <target name="proto">
+      <exec executable="${protoc}">
+          <arg value="--java_out=src/java/main"/>
+          <arg value="src/proto/deagan.proto"/>
+      </exec>
+  </target>
+
+  <target name="build" depends="proto" >
+    <mkdir dir="${classes-destination}" />
+
+    <javac includeantruntime="false" srcdir="src/java/main" destdir="${classes-destination}"
+           debug="on" includes="**/*.java">
+      <classpath>
+        <path refid="jars" />
+      </classpath>
+    </javac>
+  </target>
+
+  <target name="jar" depends="build">
+    <jar destfile="${jars-destination}/deagan.jar"
+    	  basedir="${classes-destination}">
+      <include name="**/*.class" />
+    </jar>
+  </target>
+	
+  <target name="clean">
+      <delete dir="bin" />
+  </target>
+
+  <target name="deagan" depends="build">
+      <java classname="org.spcgreenville.deagan.Deagan" fork="true">
+      <classpath>
+        <path refid="jars"/>
+        <path location="${classes-destination}"/>
+      </classpath>
+      <sysproperty key="java.util.logging.config.file" value="logging.properties"/>
+      <arg value="config.txt" />
+    </java>
+  </target>
+
+</project>
+

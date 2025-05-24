@@ -1,0 +1,45 @@
+syntax = "proto2";
+
+package org.spcgreenville.deagan;
+
+option java_package = "org.spcgreenville.deagan";
+option java_outer_classname = "Proto";
+
+message Request {
+  optional string email = 1;
+}
+
+message Response {
+  optional Status status = 1;
+}
+
+enum Status {
+  STATUS_SUCCESS = 0;
+  STATUS_NOT_AVAILABLE = 1;  // spammer
+  STATUS_SERVER_ERROR = 2;  // SQLException
+  STATUS_BAD_REQUEST = 3;  // no options
+}
+
+message LocalTime {
+  // 24-hour format
+  optional uint32 hour = 1;
+  optional uint32 minute_of_hour = 2;
+}
+
+message Config {
+  // The earliest hour:minute of any day at which the chimes will sound.
+  optional LocalTime daily_start_time = 1;
+
+  // The latest hour:minute of any day at which the chimes will sound.
+  optional LocalTime daily_end_time = 2;
+
+  // Controls the "hour count" chime which follows the tune.
+  optional bool enable_hour_count_chime = 3;
+
+  // Directory of Midi files.
+  optional string midi_file_directory = 4;
+
+  // Device label for GPIO controller.  Use "pinctrl-bcm2711" for Raspberry PI.
+  optional string gpio_label = 5;
+}
+
