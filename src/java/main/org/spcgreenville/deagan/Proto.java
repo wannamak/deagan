@@ -157,21 +157,37 @@ public final class Proto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional string email = 1;</code>
-     * @return Whether the email field is set.
+     * <code>optional int32 latch_relay = 1;</code>
+     * @return Whether the latchRelay field is set.
      */
-    boolean hasEmail();
+    boolean hasLatchRelay();
     /**
-     * <code>optional string email = 1;</code>
-     * @return The email.
+     * <code>optional int32 latch_relay = 1;</code>
+     * @return The latchRelay.
      */
-    java.lang.String getEmail();
+    int getLatchRelay();
+
     /**
-     * <code>optional string email = 1;</code>
-     * @return The bytes for email.
+     * <code>optional bool chime = 2;</code>
+     * @return Whether the chime field is set.
      */
-    com.google.protobuf.ByteString
-        getEmailBytes();
+    boolean hasChime();
+    /**
+     * <code>optional bool chime = 2;</code>
+     * @return The chime.
+     */
+    boolean getChime();
+
+    /**
+     * <code>optional bool test_connection = 3;</code>
+     * @return Whether the testConnection field is set.
+     */
+    boolean hasTestConnection();
+    /**
+     * <code>optional bool test_connection = 3;</code>
+     * @return The testConnection.
+     */
+    boolean getTestConnection();
   }
   /**
    * Protobuf type {@code org.spcgreenville.deagan.Request}
@@ -186,7 +202,6 @@ public final class Proto {
       super(builder);
     }
     private Request() {
-      email_ = "";
     }
 
     @java.lang.Override
@@ -220,10 +235,19 @@ public final class Proto {
             case 0:
               done = true;
               break;
-            case 10: {
-              com.google.protobuf.ByteString bs = input.readBytes();
+            case 8: {
               bitField0_ |= 0x00000001;
-              email_ = bs;
+              latchRelay_ = input.readInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              chime_ = input.readBool();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              testConnection_ = input.readBool();
               break;
             }
             default: {
@@ -259,52 +283,61 @@ public final class Proto {
     }
 
     private int bitField0_;
-    public static final int EMAIL_FIELD_NUMBER = 1;
-    private volatile java.lang.Object email_;
+    public static final int LATCH_RELAY_FIELD_NUMBER = 1;
+    private int latchRelay_;
     /**
-     * <code>optional string email = 1;</code>
-     * @return Whether the email field is set.
+     * <code>optional int32 latch_relay = 1;</code>
+     * @return Whether the latchRelay field is set.
      */
     @java.lang.Override
-    public boolean hasEmail() {
+    public boolean hasLatchRelay() {
       return ((bitField0_ & 0x00000001) != 0);
     }
     /**
-     * <code>optional string email = 1;</code>
-     * @return The email.
+     * <code>optional int32 latch_relay = 1;</code>
+     * @return The latchRelay.
      */
     @java.lang.Override
-    public java.lang.String getEmail() {
-      java.lang.Object ref = email_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          email_ = s;
-        }
-        return s;
-      }
+    public int getLatchRelay() {
+      return latchRelay_;
+    }
+
+    public static final int CHIME_FIELD_NUMBER = 2;
+    private boolean chime_;
+    /**
+     * <code>optional bool chime = 2;</code>
+     * @return Whether the chime field is set.
+     */
+    @java.lang.Override
+    public boolean hasChime() {
+      return ((bitField0_ & 0x00000002) != 0);
     }
     /**
-     * <code>optional string email = 1;</code>
-     * @return The bytes for email.
+     * <code>optional bool chime = 2;</code>
+     * @return The chime.
      */
     @java.lang.Override
-    public com.google.protobuf.ByteString
-        getEmailBytes() {
-      java.lang.Object ref = email_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        email_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public boolean getChime() {
+      return chime_;
+    }
+
+    public static final int TEST_CONNECTION_FIELD_NUMBER = 3;
+    private boolean testConnection_;
+    /**
+     * <code>optional bool test_connection = 3;</code>
+     * @return Whether the testConnection field is set.
+     */
+    @java.lang.Override
+    public boolean hasTestConnection() {
+      return ((bitField0_ & 0x00000004) != 0);
+    }
+    /**
+     * <code>optional bool test_connection = 3;</code>
+     * @return The testConnection.
+     */
+    @java.lang.Override
+    public boolean getTestConnection() {
+      return testConnection_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -322,7 +355,13 @@ public final class Proto {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (((bitField0_ & 0x00000001) != 0)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, email_);
+        output.writeInt32(1, latchRelay_);
+      }
+      if (((bitField0_ & 0x00000002) != 0)) {
+        output.writeBool(2, chime_);
+      }
+      if (((bitField0_ & 0x00000004) != 0)) {
+        output.writeBool(3, testConnection_);
       }
       unknownFields.writeTo(output);
     }
@@ -334,7 +373,16 @@ public final class Proto {
 
       size = 0;
       if (((bitField0_ & 0x00000001) != 0)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, email_);
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, latchRelay_);
+      }
+      if (((bitField0_ & 0x00000002) != 0)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(2, chime_);
+      }
+      if (((bitField0_ & 0x00000004) != 0)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(3, testConnection_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -351,10 +399,20 @@ public final class Proto {
       }
       org.spcgreenville.deagan.Proto.Request other = (org.spcgreenville.deagan.Proto.Request) obj;
 
-      if (hasEmail() != other.hasEmail()) return false;
-      if (hasEmail()) {
-        if (!getEmail()
-            .equals(other.getEmail())) return false;
+      if (hasLatchRelay() != other.hasLatchRelay()) return false;
+      if (hasLatchRelay()) {
+        if (getLatchRelay()
+            != other.getLatchRelay()) return false;
+      }
+      if (hasChime() != other.hasChime()) return false;
+      if (hasChime()) {
+        if (getChime()
+            != other.getChime()) return false;
+      }
+      if (hasTestConnection() != other.hasTestConnection()) return false;
+      if (hasTestConnection()) {
+        if (getTestConnection()
+            != other.getTestConnection()) return false;
       }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
@@ -367,9 +425,19 @@ public final class Proto {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasEmail()) {
-        hash = (37 * hash) + EMAIL_FIELD_NUMBER;
-        hash = (53 * hash) + getEmail().hashCode();
+      if (hasLatchRelay()) {
+        hash = (37 * hash) + LATCH_RELAY_FIELD_NUMBER;
+        hash = (53 * hash) + getLatchRelay();
+      }
+      if (hasChime()) {
+        hash = (37 * hash) + CHIME_FIELD_NUMBER;
+        hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+            getChime());
+      }
+      if (hasTestConnection()) {
+        hash = (37 * hash) + TEST_CONNECTION_FIELD_NUMBER;
+        hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+            getTestConnection());
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -504,8 +572,12 @@ public final class Proto {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        email_ = "";
+        latchRelay_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
+        chime_ = false;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        testConnection_ = false;
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -535,9 +607,17 @@ public final class Proto {
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.latchRelay_ = latchRelay_;
           to_bitField0_ |= 0x00000001;
         }
-        result.email_ = email_;
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.chime_ = chime_;
+          to_bitField0_ |= 0x00000002;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.testConnection_ = testConnection_;
+          to_bitField0_ |= 0x00000004;
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -587,10 +667,14 @@ public final class Proto {
 
       public Builder mergeFrom(org.spcgreenville.deagan.Proto.Request other) {
         if (other == org.spcgreenville.deagan.Proto.Request.getDefaultInstance()) return this;
-        if (other.hasEmail()) {
-          bitField0_ |= 0x00000001;
-          email_ = other.email_;
-          onChanged();
+        if (other.hasLatchRelay()) {
+          setLatchRelay(other.getLatchRelay());
+        }
+        if (other.hasChime()) {
+          setChime(other.getChime());
+        }
+        if (other.hasTestConnection()) {
+          setTestConnection(other.getTestConnection());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -622,86 +706,119 @@ public final class Proto {
       }
       private int bitField0_;
 
-      private java.lang.Object email_ = "";
+      private int latchRelay_ ;
       /**
-       * <code>optional string email = 1;</code>
-       * @return Whether the email field is set.
+       * <code>optional int32 latch_relay = 1;</code>
+       * @return Whether the latchRelay field is set.
        */
-      public boolean hasEmail() {
+      @java.lang.Override
+      public boolean hasLatchRelay() {
         return ((bitField0_ & 0x00000001) != 0);
       }
       /**
-       * <code>optional string email = 1;</code>
-       * @return The email.
+       * <code>optional int32 latch_relay = 1;</code>
+       * @return The latchRelay.
        */
-      public java.lang.String getEmail() {
-        java.lang.Object ref = email_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            email_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      @java.lang.Override
+      public int getLatchRelay() {
+        return latchRelay_;
       }
       /**
-       * <code>optional string email = 1;</code>
-       * @return The bytes for email.
-       */
-      public com.google.protobuf.ByteString
-          getEmailBytes() {
-        java.lang.Object ref = email_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          email_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string email = 1;</code>
-       * @param value The email to set.
+       * <code>optional int32 latch_relay = 1;</code>
+       * @param value The latchRelay to set.
        * @return This builder for chaining.
        */
-      public Builder setEmail(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        email_ = value;
+      public Builder setLatchRelay(int value) {
+        bitField0_ |= 0x00000001;
+        latchRelay_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string email = 1;</code>
+       * <code>optional int32 latch_relay = 1;</code>
        * @return This builder for chaining.
        */
-      public Builder clearEmail() {
+      public Builder clearLatchRelay() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        email_ = getDefaultInstance().getEmail();
+        latchRelay_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private boolean chime_ ;
+      /**
+       * <code>optional bool chime = 2;</code>
+       * @return Whether the chime field is set.
+       */
+      @java.lang.Override
+      public boolean hasChime() {
+        return ((bitField0_ & 0x00000002) != 0);
+      }
+      /**
+       * <code>optional bool chime = 2;</code>
+       * @return The chime.
+       */
+      @java.lang.Override
+      public boolean getChime() {
+        return chime_;
+      }
+      /**
+       * <code>optional bool chime = 2;</code>
+       * @param value The chime to set.
+       * @return This builder for chaining.
+       */
+      public Builder setChime(boolean value) {
+        bitField0_ |= 0x00000002;
+        chime_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string email = 1;</code>
-       * @param value The bytes for email to set.
+       * <code>optional bool chime = 2;</code>
        * @return This builder for chaining.
        */
-      public Builder setEmailBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        email_ = value;
+      public Builder clearChime() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        chime_ = false;
+        onChanged();
+        return this;
+      }
+
+      private boolean testConnection_ ;
+      /**
+       * <code>optional bool test_connection = 3;</code>
+       * @return Whether the testConnection field is set.
+       */
+      @java.lang.Override
+      public boolean hasTestConnection() {
+        return ((bitField0_ & 0x00000004) != 0);
+      }
+      /**
+       * <code>optional bool test_connection = 3;</code>
+       * @return The testConnection.
+       */
+      @java.lang.Override
+      public boolean getTestConnection() {
+        return testConnection_;
+      }
+      /**
+       * <code>optional bool test_connection = 3;</code>
+       * @param value The testConnection to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTestConnection(boolean value) {
+        bitField0_ |= 0x00000004;
+        testConnection_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool test_connection = 3;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearTestConnection() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        testConnection_ = false;
         onChanged();
         return this;
       }
@@ -772,6 +889,23 @@ public final class Proto {
      * @return The status.
      */
     org.spcgreenville.deagan.Proto.Status getStatus();
+
+    /**
+     * <code>optional string status_message = 2;</code>
+     * @return Whether the statusMessage field is set.
+     */
+    boolean hasStatusMessage();
+    /**
+     * <code>optional string status_message = 2;</code>
+     * @return The statusMessage.
+     */
+    java.lang.String getStatusMessage();
+    /**
+     * <code>optional string status_message = 2;</code>
+     * @return The bytes for statusMessage.
+     */
+    com.google.protobuf.ByteString
+        getStatusMessageBytes();
   }
   /**
    * Protobuf type {@code org.spcgreenville.deagan.Response}
@@ -787,6 +921,7 @@ public final class Proto {
     }
     private Response() {
       status_ = 0;
+      statusMessage_ = "";
     }
 
     @java.lang.Override
@@ -830,6 +965,12 @@ public final class Proto {
                 bitField0_ |= 0x00000001;
                 status_ = rawValue;
               }
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              statusMessage_ = bs;
               break;
             }
             default: {
@@ -884,6 +1025,54 @@ public final class Proto {
       return result == null ? org.spcgreenville.deagan.Proto.Status.STATUS_SUCCESS : result;
     }
 
+    public static final int STATUS_MESSAGE_FIELD_NUMBER = 2;
+    private volatile java.lang.Object statusMessage_;
+    /**
+     * <code>optional string status_message = 2;</code>
+     * @return Whether the statusMessage field is set.
+     */
+    @java.lang.Override
+    public boolean hasStatusMessage() {
+      return ((bitField0_ & 0x00000002) != 0);
+    }
+    /**
+     * <code>optional string status_message = 2;</code>
+     * @return The statusMessage.
+     */
+    @java.lang.Override
+    public java.lang.String getStatusMessage() {
+      java.lang.Object ref = statusMessage_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          statusMessage_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string status_message = 2;</code>
+     * @return The bytes for statusMessage.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getStatusMessageBytes() {
+      java.lang.Object ref = statusMessage_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        statusMessage_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -901,6 +1090,9 @@ public final class Proto {
       if (((bitField0_ & 0x00000001) != 0)) {
         output.writeEnum(1, status_);
       }
+      if (((bitField0_ & 0x00000002) != 0)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, statusMessage_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -913,6 +1105,9 @@ public final class Proto {
       if (((bitField0_ & 0x00000001) != 0)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(1, status_);
+      }
+      if (((bitField0_ & 0x00000002) != 0)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, statusMessage_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -933,6 +1128,11 @@ public final class Proto {
       if (hasStatus()) {
         if (status_ != other.status_) return false;
       }
+      if (hasStatusMessage() != other.hasStatusMessage()) return false;
+      if (hasStatusMessage()) {
+        if (!getStatusMessage()
+            .equals(other.getStatusMessage())) return false;
+      }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -947,6 +1147,10 @@ public final class Proto {
       if (hasStatus()) {
         hash = (37 * hash) + STATUS_FIELD_NUMBER;
         hash = (53 * hash) + status_;
+      }
+      if (hasStatusMessage()) {
+        hash = (37 * hash) + STATUS_MESSAGE_FIELD_NUMBER;
+        hash = (53 * hash) + getStatusMessage().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -1083,6 +1287,8 @@ public final class Proto {
         super.clear();
         status_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
+        statusMessage_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -1115,6 +1321,10 @@ public final class Proto {
           to_bitField0_ |= 0x00000001;
         }
         result.status_ = status_;
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.statusMessage_ = statusMessage_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1166,6 +1376,11 @@ public final class Proto {
         if (other == org.spcgreenville.deagan.Proto.Response.getDefaultInstance()) return this;
         if (other.hasStatus()) {
           setStatus(other.getStatus());
+        }
+        if (other.hasStatusMessage()) {
+          bitField0_ |= 0x00000002;
+          statusMessage_ = other.statusMessage_;
+          onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -1236,6 +1451,90 @@ public final class Proto {
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000001);
         status_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object statusMessage_ = "";
+      /**
+       * <code>optional string status_message = 2;</code>
+       * @return Whether the statusMessage field is set.
+       */
+      public boolean hasStatusMessage() {
+        return ((bitField0_ & 0x00000002) != 0);
+      }
+      /**
+       * <code>optional string status_message = 2;</code>
+       * @return The statusMessage.
+       */
+      public java.lang.String getStatusMessage() {
+        java.lang.Object ref = statusMessage_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            statusMessage_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string status_message = 2;</code>
+       * @return The bytes for statusMessage.
+       */
+      public com.google.protobuf.ByteString
+          getStatusMessageBytes() {
+        java.lang.Object ref = statusMessage_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          statusMessage_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string status_message = 2;</code>
+       * @param value The statusMessage to set.
+       * @return This builder for chaining.
+       */
+      public Builder setStatusMessage(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        statusMessage_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string status_message = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearStatusMessage() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        statusMessage_ = getDefaultInstance().getStatusMessage();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string status_message = 2;</code>
+       * @param value The bytes for statusMessage to set.
+       * @return This builder for chaining.
+       */
+      public Builder setStatusMessageBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        statusMessage_ = value;
         onChanged();
         return this;
       }
@@ -2080,6 +2379,34 @@ public final class Proto {
      */
     com.google.protobuf.ByteString
         getGpioLabelBytes();
+
+    /**
+     * <code>optional string control_hostname = 6;</code>
+     * @return Whether the controlHostname field is set.
+     */
+    boolean hasControlHostname();
+    /**
+     * <code>optional string control_hostname = 6;</code>
+     * @return The controlHostname.
+     */
+    java.lang.String getControlHostname();
+    /**
+     * <code>optional string control_hostname = 6;</code>
+     * @return The bytes for controlHostname.
+     */
+    com.google.protobuf.ByteString
+        getControlHostnameBytes();
+
+    /**
+     * <code>optional int32 control_port = 7;</code>
+     * @return Whether the controlPort field is set.
+     */
+    boolean hasControlPort();
+    /**
+     * <code>optional int32 control_port = 7;</code>
+     * @return The controlPort.
+     */
+    int getControlPort();
   }
   /**
    * Protobuf type {@code org.spcgreenville.deagan.Config}
@@ -2096,6 +2423,7 @@ public final class Proto {
     private Config() {
       midiFileDirectory_ = "";
       gpioLabel_ = "";
+      controlHostname_ = "";
     }
 
     @java.lang.Override
@@ -2170,6 +2498,17 @@ public final class Proto {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000010;
               gpioLabel_ = bs;
+              break;
+            }
+            case 50: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000020;
+              controlHostname_ = bs;
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000040;
+              controlPort_ = input.readInt32();
               break;
             }
             default: {
@@ -2428,6 +2767,73 @@ public final class Proto {
       }
     }
 
+    public static final int CONTROL_HOSTNAME_FIELD_NUMBER = 6;
+    private volatile java.lang.Object controlHostname_;
+    /**
+     * <code>optional string control_hostname = 6;</code>
+     * @return Whether the controlHostname field is set.
+     */
+    @java.lang.Override
+    public boolean hasControlHostname() {
+      return ((bitField0_ & 0x00000020) != 0);
+    }
+    /**
+     * <code>optional string control_hostname = 6;</code>
+     * @return The controlHostname.
+     */
+    @java.lang.Override
+    public java.lang.String getControlHostname() {
+      java.lang.Object ref = controlHostname_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          controlHostname_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string control_hostname = 6;</code>
+     * @return The bytes for controlHostname.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getControlHostnameBytes() {
+      java.lang.Object ref = controlHostname_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        controlHostname_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int CONTROL_PORT_FIELD_NUMBER = 7;
+    private int controlPort_;
+    /**
+     * <code>optional int32 control_port = 7;</code>
+     * @return Whether the controlPort field is set.
+     */
+    @java.lang.Override
+    public boolean hasControlPort() {
+      return ((bitField0_ & 0x00000040) != 0);
+    }
+    /**
+     * <code>optional int32 control_port = 7;</code>
+     * @return The controlPort.
+     */
+    @java.lang.Override
+    public int getControlPort() {
+      return controlPort_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -2457,6 +2863,12 @@ public final class Proto {
       if (((bitField0_ & 0x00000010) != 0)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 5, gpioLabel_);
       }
+      if (((bitField0_ & 0x00000020) != 0)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, controlHostname_);
+      }
+      if (((bitField0_ & 0x00000040) != 0)) {
+        output.writeInt32(7, controlPort_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -2483,6 +2895,13 @@ public final class Proto {
       }
       if (((bitField0_ & 0x00000010) != 0)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, gpioLabel_);
+      }
+      if (((bitField0_ & 0x00000020) != 0)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, controlHostname_);
+      }
+      if (((bitField0_ & 0x00000040) != 0)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(7, controlPort_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2524,6 +2943,16 @@ public final class Proto {
         if (!getGpioLabel()
             .equals(other.getGpioLabel())) return false;
       }
+      if (hasControlHostname() != other.hasControlHostname()) return false;
+      if (hasControlHostname()) {
+        if (!getControlHostname()
+            .equals(other.getControlHostname())) return false;
+      }
+      if (hasControlPort() != other.hasControlPort()) return false;
+      if (hasControlPort()) {
+        if (getControlPort()
+            != other.getControlPort()) return false;
+      }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -2555,6 +2984,14 @@ public final class Proto {
       if (hasGpioLabel()) {
         hash = (37 * hash) + GPIO_LABEL_FIELD_NUMBER;
         hash = (53 * hash) + getGpioLabel().hashCode();
+      }
+      if (hasControlHostname()) {
+        hash = (37 * hash) + CONTROL_HOSTNAME_FIELD_NUMBER;
+        hash = (53 * hash) + getControlHostname().hashCode();
+      }
+      if (hasControlPort()) {
+        hash = (37 * hash) + CONTROL_PORT_FIELD_NUMBER;
+        hash = (53 * hash) + getControlPort();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -2709,6 +3146,10 @@ public final class Proto {
         bitField0_ = (bitField0_ & ~0x00000008);
         gpioLabel_ = "";
         bitField0_ = (bitField0_ & ~0x00000010);
+        controlHostname_ = "";
+        bitField0_ = (bitField0_ & ~0x00000020);
+        controlPort_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -2765,6 +3206,14 @@ public final class Proto {
           to_bitField0_ |= 0x00000010;
         }
         result.gpioLabel_ = gpioLabel_;
+        if (((from_bitField0_ & 0x00000020) != 0)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.controlHostname_ = controlHostname_;
+        if (((from_bitField0_ & 0x00000040) != 0)) {
+          result.controlPort_ = controlPort_;
+          to_bitField0_ |= 0x00000040;
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2832,6 +3281,14 @@ public final class Proto {
           bitField0_ |= 0x00000010;
           gpioLabel_ = other.gpioLabel_;
           onChanged();
+        }
+        if (other.hasControlHostname()) {
+          bitField0_ |= 0x00000020;
+          controlHostname_ = other.controlHostname_;
+          onChanged();
+        }
+        if (other.hasControlPort()) {
+          setControlPort(other.getControlPort());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -3445,6 +3902,129 @@ public final class Proto {
         onChanged();
         return this;
       }
+
+      private java.lang.Object controlHostname_ = "";
+      /**
+       * <code>optional string control_hostname = 6;</code>
+       * @return Whether the controlHostname field is set.
+       */
+      public boolean hasControlHostname() {
+        return ((bitField0_ & 0x00000020) != 0);
+      }
+      /**
+       * <code>optional string control_hostname = 6;</code>
+       * @return The controlHostname.
+       */
+      public java.lang.String getControlHostname() {
+        java.lang.Object ref = controlHostname_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            controlHostname_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string control_hostname = 6;</code>
+       * @return The bytes for controlHostname.
+       */
+      public com.google.protobuf.ByteString
+          getControlHostnameBytes() {
+        java.lang.Object ref = controlHostname_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          controlHostname_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string control_hostname = 6;</code>
+       * @param value The controlHostname to set.
+       * @return This builder for chaining.
+       */
+      public Builder setControlHostname(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        controlHostname_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string control_hostname = 6;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearControlHostname() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        controlHostname_ = getDefaultInstance().getControlHostname();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string control_hostname = 6;</code>
+       * @param value The bytes for controlHostname to set.
+       * @return This builder for chaining.
+       */
+      public Builder setControlHostnameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        controlHostname_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int controlPort_ ;
+      /**
+       * <code>optional int32 control_port = 7;</code>
+       * @return Whether the controlPort field is set.
+       */
+      @java.lang.Override
+      public boolean hasControlPort() {
+        return ((bitField0_ & 0x00000040) != 0);
+      }
+      /**
+       * <code>optional int32 control_port = 7;</code>
+       * @return The controlPort.
+       */
+      @java.lang.Override
+      public int getControlPort() {
+        return controlPort_;
+      }
+      /**
+       * <code>optional int32 control_port = 7;</code>
+       * @param value The controlPort to set.
+       * @return This builder for chaining.
+       */
+      public Builder setControlPort(int value) {
+        bitField0_ |= 0x00000040;
+        controlPort_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 control_port = 7;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearControlPort() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        controlPort_ = 0;
+        onChanged();
+        return this;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -3528,19 +4108,22 @@ public final class Proto {
   static {
     java.lang.String[] descriptorData = {
       "\n\026src/proto/deagan.proto\022\030org.spcgreenvi" +
-      "lle.deagan\"\030\n\007Request\022\r\n\005email\030\001 \001(\t\"<\n\010" +
-      "Response\0220\n\006status\030\001 \001(\0162 .org.spcgreenv" +
-      "ille.deagan.Status\"1\n\tLocalTime\022\014\n\004hour\030" +
-      "\001 \001(\r\022\026\n\016minute_of_hour\030\002 \001(\r\"\326\001\n\006Config" +
-      "\022=\n\020daily_start_time\030\001 \001(\0132#.org.spcgree" +
-      "nville.deagan.LocalTime\022;\n\016daily_end_tim" +
-      "e\030\002 \001(\0132#.org.spcgreenville.deagan.Local" +
-      "Time\022\037\n\027enable_hour_count_chime\030\003 \001(\010\022\033\n" +
-      "\023midi_file_directory\030\004 \001(\t\022\022\n\ngpio_label" +
-      "\030\005 \001(\t*g\n\006Status\022\022\n\016STATUS_SUCCESS\020\000\022\030\n\024" +
-      "STATUS_NOT_AVAILABLE\020\001\022\027\n\023STATUS_SERVER_" +
-      "ERROR\020\002\022\026\n\022STATUS_BAD_REQUEST\020\003B!\n\030org.s" +
-      "pcgreenville.deaganB\005Proto"
+      "lle.deagan\"F\n\007Request\022\023\n\013latch_relay\030\001 \001" +
+      "(\005\022\r\n\005chime\030\002 \001(\010\022\027\n\017test_connection\030\003 \001" +
+      "(\010\"T\n\010Response\0220\n\006status\030\001 \001(\0162 .org.spc" +
+      "greenville.deagan.Status\022\026\n\016status_messa" +
+      "ge\030\002 \001(\t\"1\n\tLocalTime\022\014\n\004hour\030\001 \001(\r\022\026\n\016m" +
+      "inute_of_hour\030\002 \001(\r\"\206\002\n\006Config\022=\n\020daily_" +
+      "start_time\030\001 \001(\0132#.org.spcgreenville.dea" +
+      "gan.LocalTime\022;\n\016daily_end_time\030\002 \001(\0132#." +
+      "org.spcgreenville.deagan.LocalTime\022\037\n\027en" +
+      "able_hour_count_chime\030\003 \001(\010\022\033\n\023midi_file" +
+      "_directory\030\004 \001(\t\022\022\n\ngpio_label\030\005 \001(\t\022\030\n\020" +
+      "control_hostname\030\006 \001(\t\022\024\n\014control_port\030\007" +
+      " \001(\005*g\n\006Status\022\022\n\016STATUS_SUCCESS\020\000\022\030\n\024ST" +
+      "ATUS_NOT_AVAILABLE\020\001\022\027\n\023STATUS_SERVER_ER" +
+      "ROR\020\002\022\026\n\022STATUS_BAD_REQUEST\020\003B!\n\030org.spc" +
+      "greenville.deaganB\005Proto"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -3551,13 +4134,13 @@ public final class Proto {
     internal_static_org_spcgreenville_deagan_Request_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_org_spcgreenville_deagan_Request_descriptor,
-        new java.lang.String[] { "Email", });
+        new java.lang.String[] { "LatchRelay", "Chime", "TestConnection", });
     internal_static_org_spcgreenville_deagan_Response_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_org_spcgreenville_deagan_Response_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_org_spcgreenville_deagan_Response_descriptor,
-        new java.lang.String[] { "Status", });
+        new java.lang.String[] { "Status", "StatusMessage", });
     internal_static_org_spcgreenville_deagan_LocalTime_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_org_spcgreenville_deagan_LocalTime_fieldAccessorTable = new
@@ -3569,7 +4152,7 @@ public final class Proto {
     internal_static_org_spcgreenville_deagan_Config_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_org_spcgreenville_deagan_Config_descriptor,
-        new java.lang.String[] { "DailyStartTime", "DailyEndTime", "EnableHourCountChime", "MidiFileDirectory", "GpioLabel", });
+        new java.lang.String[] { "DailyStartTime", "DailyEndTime", "EnableHourCountChime", "MidiFileDirectory", "GpioLabel", "ControlHostname", "ControlPort", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
