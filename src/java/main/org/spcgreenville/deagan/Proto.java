@@ -168,26 +168,70 @@ public final class Proto {
     int getLatchRelay();
 
     /**
-     * <code>optional bool chime = 2;</code>
+     * <code>optional int32 unlatch_relay = 2;</code>
+     * @return Whether the unlatchRelay field is set.
+     */
+    boolean hasUnlatchRelay();
+    /**
+     * <code>optional int32 unlatch_relay = 2;</code>
+     * @return The unlatchRelay.
+     */
+    int getUnlatchRelay();
+
+    /**
+     * <code>optional bool chime = 3;</code>
      * @return Whether the chime field is set.
      */
     boolean hasChime();
     /**
-     * <code>optional bool chime = 2;</code>
+     * <code>optional bool chime = 3;</code>
      * @return The chime.
      */
     boolean getChime();
 
     /**
-     * <code>optional bool test_connection = 3;</code>
+     * <code>optional bool test_connection = 4;</code>
      * @return Whether the testConnection field is set.
      */
     boolean hasTestConnection();
     /**
-     * <code>optional bool test_connection = 3;</code>
+     * <code>optional bool test_connection = 4;</code>
      * @return The testConnection.
      */
     boolean getTestConnection();
+
+    /**
+     * <code>optional int32 chime_latch_one_duration_ms = 5;</code>
+     * @return Whether the chimeLatchOneDurationMs field is set.
+     */
+    boolean hasChimeLatchOneDurationMs();
+    /**
+     * <code>optional int32 chime_latch_one_duration_ms = 5;</code>
+     * @return The chimeLatchOneDurationMs.
+     */
+    int getChimeLatchOneDurationMs();
+
+    /**
+     * <code>optional int32 chime_pause_duration_ms = 6;</code>
+     * @return Whether the chimePauseDurationMs field is set.
+     */
+    boolean hasChimePauseDurationMs();
+    /**
+     * <code>optional int32 chime_pause_duration_ms = 6;</code>
+     * @return The chimePauseDurationMs.
+     */
+    int getChimePauseDurationMs();
+
+    /**
+     * <code>optional int32 chime_latch_two_duration_ms = 7;</code>
+     * @return Whether the chimeLatchTwoDurationMs field is set.
+     */
+    boolean hasChimeLatchTwoDurationMs();
+    /**
+     * <code>optional int32 chime_latch_two_duration_ms = 7;</code>
+     * @return The chimeLatchTwoDurationMs.
+     */
+    int getChimeLatchTwoDurationMs();
   }
   /**
    * Protobuf type {@code org.spcgreenville.deagan.Request}
@@ -242,12 +286,32 @@ public final class Proto {
             }
             case 16: {
               bitField0_ |= 0x00000002;
-              chime_ = input.readBool();
+              unlatchRelay_ = input.readInt32();
               break;
             }
             case 24: {
               bitField0_ |= 0x00000004;
+              chime_ = input.readBool();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
               testConnection_ = input.readBool();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              chimeLatchOneDurationMs_ = input.readInt32();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              chimePauseDurationMs_ = input.readInt32();
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000040;
+              chimeLatchTwoDurationMs_ = input.readInt32();
               break;
             }
             default: {
@@ -302,18 +366,37 @@ public final class Proto {
       return latchRelay_;
     }
 
-    public static final int CHIME_FIELD_NUMBER = 2;
+    public static final int UNLATCH_RELAY_FIELD_NUMBER = 2;
+    private int unlatchRelay_;
+    /**
+     * <code>optional int32 unlatch_relay = 2;</code>
+     * @return Whether the unlatchRelay field is set.
+     */
+    @java.lang.Override
+    public boolean hasUnlatchRelay() {
+      return ((bitField0_ & 0x00000002) != 0);
+    }
+    /**
+     * <code>optional int32 unlatch_relay = 2;</code>
+     * @return The unlatchRelay.
+     */
+    @java.lang.Override
+    public int getUnlatchRelay() {
+      return unlatchRelay_;
+    }
+
+    public static final int CHIME_FIELD_NUMBER = 3;
     private boolean chime_;
     /**
-     * <code>optional bool chime = 2;</code>
+     * <code>optional bool chime = 3;</code>
      * @return Whether the chime field is set.
      */
     @java.lang.Override
     public boolean hasChime() {
-      return ((bitField0_ & 0x00000002) != 0);
+      return ((bitField0_ & 0x00000004) != 0);
     }
     /**
-     * <code>optional bool chime = 2;</code>
+     * <code>optional bool chime = 3;</code>
      * @return The chime.
      */
     @java.lang.Override
@@ -321,23 +404,80 @@ public final class Proto {
       return chime_;
     }
 
-    public static final int TEST_CONNECTION_FIELD_NUMBER = 3;
+    public static final int TEST_CONNECTION_FIELD_NUMBER = 4;
     private boolean testConnection_;
     /**
-     * <code>optional bool test_connection = 3;</code>
+     * <code>optional bool test_connection = 4;</code>
      * @return Whether the testConnection field is set.
      */
     @java.lang.Override
     public boolean hasTestConnection() {
-      return ((bitField0_ & 0x00000004) != 0);
+      return ((bitField0_ & 0x00000008) != 0);
     }
     /**
-     * <code>optional bool test_connection = 3;</code>
+     * <code>optional bool test_connection = 4;</code>
      * @return The testConnection.
      */
     @java.lang.Override
     public boolean getTestConnection() {
       return testConnection_;
+    }
+
+    public static final int CHIME_LATCH_ONE_DURATION_MS_FIELD_NUMBER = 5;
+    private int chimeLatchOneDurationMs_;
+    /**
+     * <code>optional int32 chime_latch_one_duration_ms = 5;</code>
+     * @return Whether the chimeLatchOneDurationMs field is set.
+     */
+    @java.lang.Override
+    public boolean hasChimeLatchOneDurationMs() {
+      return ((bitField0_ & 0x00000010) != 0);
+    }
+    /**
+     * <code>optional int32 chime_latch_one_duration_ms = 5;</code>
+     * @return The chimeLatchOneDurationMs.
+     */
+    @java.lang.Override
+    public int getChimeLatchOneDurationMs() {
+      return chimeLatchOneDurationMs_;
+    }
+
+    public static final int CHIME_PAUSE_DURATION_MS_FIELD_NUMBER = 6;
+    private int chimePauseDurationMs_;
+    /**
+     * <code>optional int32 chime_pause_duration_ms = 6;</code>
+     * @return Whether the chimePauseDurationMs field is set.
+     */
+    @java.lang.Override
+    public boolean hasChimePauseDurationMs() {
+      return ((bitField0_ & 0x00000020) != 0);
+    }
+    /**
+     * <code>optional int32 chime_pause_duration_ms = 6;</code>
+     * @return The chimePauseDurationMs.
+     */
+    @java.lang.Override
+    public int getChimePauseDurationMs() {
+      return chimePauseDurationMs_;
+    }
+
+    public static final int CHIME_LATCH_TWO_DURATION_MS_FIELD_NUMBER = 7;
+    private int chimeLatchTwoDurationMs_;
+    /**
+     * <code>optional int32 chime_latch_two_duration_ms = 7;</code>
+     * @return Whether the chimeLatchTwoDurationMs field is set.
+     */
+    @java.lang.Override
+    public boolean hasChimeLatchTwoDurationMs() {
+      return ((bitField0_ & 0x00000040) != 0);
+    }
+    /**
+     * <code>optional int32 chime_latch_two_duration_ms = 7;</code>
+     * @return The chimeLatchTwoDurationMs.
+     */
+    @java.lang.Override
+    public int getChimeLatchTwoDurationMs() {
+      return chimeLatchTwoDurationMs_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -358,10 +498,22 @@ public final class Proto {
         output.writeInt32(1, latchRelay_);
       }
       if (((bitField0_ & 0x00000002) != 0)) {
-        output.writeBool(2, chime_);
+        output.writeInt32(2, unlatchRelay_);
       }
       if (((bitField0_ & 0x00000004) != 0)) {
-        output.writeBool(3, testConnection_);
+        output.writeBool(3, chime_);
+      }
+      if (((bitField0_ & 0x00000008) != 0)) {
+        output.writeBool(4, testConnection_);
+      }
+      if (((bitField0_ & 0x00000010) != 0)) {
+        output.writeInt32(5, chimeLatchOneDurationMs_);
+      }
+      if (((bitField0_ & 0x00000020) != 0)) {
+        output.writeInt32(6, chimePauseDurationMs_);
+      }
+      if (((bitField0_ & 0x00000040) != 0)) {
+        output.writeInt32(7, chimeLatchTwoDurationMs_);
       }
       unknownFields.writeTo(output);
     }
@@ -378,11 +530,27 @@ public final class Proto {
       }
       if (((bitField0_ & 0x00000002) != 0)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(2, chime_);
+          .computeInt32Size(2, unlatchRelay_);
       }
       if (((bitField0_ & 0x00000004) != 0)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(3, testConnection_);
+          .computeBoolSize(3, chime_);
+      }
+      if (((bitField0_ & 0x00000008) != 0)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(4, testConnection_);
+      }
+      if (((bitField0_ & 0x00000010) != 0)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, chimeLatchOneDurationMs_);
+      }
+      if (((bitField0_ & 0x00000020) != 0)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(6, chimePauseDurationMs_);
+      }
+      if (((bitField0_ & 0x00000040) != 0)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(7, chimeLatchTwoDurationMs_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -404,6 +572,11 @@ public final class Proto {
         if (getLatchRelay()
             != other.getLatchRelay()) return false;
       }
+      if (hasUnlatchRelay() != other.hasUnlatchRelay()) return false;
+      if (hasUnlatchRelay()) {
+        if (getUnlatchRelay()
+            != other.getUnlatchRelay()) return false;
+      }
       if (hasChime() != other.hasChime()) return false;
       if (hasChime()) {
         if (getChime()
@@ -413,6 +586,21 @@ public final class Proto {
       if (hasTestConnection()) {
         if (getTestConnection()
             != other.getTestConnection()) return false;
+      }
+      if (hasChimeLatchOneDurationMs() != other.hasChimeLatchOneDurationMs()) return false;
+      if (hasChimeLatchOneDurationMs()) {
+        if (getChimeLatchOneDurationMs()
+            != other.getChimeLatchOneDurationMs()) return false;
+      }
+      if (hasChimePauseDurationMs() != other.hasChimePauseDurationMs()) return false;
+      if (hasChimePauseDurationMs()) {
+        if (getChimePauseDurationMs()
+            != other.getChimePauseDurationMs()) return false;
+      }
+      if (hasChimeLatchTwoDurationMs() != other.hasChimeLatchTwoDurationMs()) return false;
+      if (hasChimeLatchTwoDurationMs()) {
+        if (getChimeLatchTwoDurationMs()
+            != other.getChimeLatchTwoDurationMs()) return false;
       }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
@@ -429,6 +617,10 @@ public final class Proto {
         hash = (37 * hash) + LATCH_RELAY_FIELD_NUMBER;
         hash = (53 * hash) + getLatchRelay();
       }
+      if (hasUnlatchRelay()) {
+        hash = (37 * hash) + UNLATCH_RELAY_FIELD_NUMBER;
+        hash = (53 * hash) + getUnlatchRelay();
+      }
       if (hasChime()) {
         hash = (37 * hash) + CHIME_FIELD_NUMBER;
         hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
@@ -438,6 +630,18 @@ public final class Proto {
         hash = (37 * hash) + TEST_CONNECTION_FIELD_NUMBER;
         hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
             getTestConnection());
+      }
+      if (hasChimeLatchOneDurationMs()) {
+        hash = (37 * hash) + CHIME_LATCH_ONE_DURATION_MS_FIELD_NUMBER;
+        hash = (53 * hash) + getChimeLatchOneDurationMs();
+      }
+      if (hasChimePauseDurationMs()) {
+        hash = (37 * hash) + CHIME_PAUSE_DURATION_MS_FIELD_NUMBER;
+        hash = (53 * hash) + getChimePauseDurationMs();
+      }
+      if (hasChimeLatchTwoDurationMs()) {
+        hash = (37 * hash) + CHIME_LATCH_TWO_DURATION_MS_FIELD_NUMBER;
+        hash = (53 * hash) + getChimeLatchTwoDurationMs();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -574,10 +778,18 @@ public final class Proto {
         super.clear();
         latchRelay_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        chime_ = false;
+        unlatchRelay_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
-        testConnection_ = false;
+        chime_ = false;
         bitField0_ = (bitField0_ & ~0x00000004);
+        testConnection_ = false;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        chimeLatchOneDurationMs_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        chimePauseDurationMs_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        chimeLatchTwoDurationMs_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -611,12 +823,28 @@ public final class Proto {
           to_bitField0_ |= 0x00000001;
         }
         if (((from_bitField0_ & 0x00000002) != 0)) {
-          result.chime_ = chime_;
+          result.unlatchRelay_ = unlatchRelay_;
           to_bitField0_ |= 0x00000002;
         }
         if (((from_bitField0_ & 0x00000004) != 0)) {
-          result.testConnection_ = testConnection_;
+          result.chime_ = chime_;
           to_bitField0_ |= 0x00000004;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.testConnection_ = testConnection_;
+          to_bitField0_ |= 0x00000008;
+        }
+        if (((from_bitField0_ & 0x00000010) != 0)) {
+          result.chimeLatchOneDurationMs_ = chimeLatchOneDurationMs_;
+          to_bitField0_ |= 0x00000010;
+        }
+        if (((from_bitField0_ & 0x00000020) != 0)) {
+          result.chimePauseDurationMs_ = chimePauseDurationMs_;
+          to_bitField0_ |= 0x00000020;
+        }
+        if (((from_bitField0_ & 0x00000040) != 0)) {
+          result.chimeLatchTwoDurationMs_ = chimeLatchTwoDurationMs_;
+          to_bitField0_ |= 0x00000040;
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -670,11 +898,23 @@ public final class Proto {
         if (other.hasLatchRelay()) {
           setLatchRelay(other.getLatchRelay());
         }
+        if (other.hasUnlatchRelay()) {
+          setUnlatchRelay(other.getUnlatchRelay());
+        }
         if (other.hasChime()) {
           setChime(other.getChime());
         }
         if (other.hasTestConnection()) {
           setTestConnection(other.getTestConnection());
+        }
+        if (other.hasChimeLatchOneDurationMs()) {
+          setChimeLatchOneDurationMs(other.getChimeLatchOneDurationMs());
+        }
+        if (other.hasChimePauseDurationMs()) {
+          setChimePauseDurationMs(other.getChimePauseDurationMs());
+        }
+        if (other.hasChimeLatchTwoDurationMs()) {
+          setChimeLatchTwoDurationMs(other.getChimeLatchTwoDurationMs());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -745,17 +985,56 @@ public final class Proto {
         return this;
       }
 
+      private int unlatchRelay_ ;
+      /**
+       * <code>optional int32 unlatch_relay = 2;</code>
+       * @return Whether the unlatchRelay field is set.
+       */
+      @java.lang.Override
+      public boolean hasUnlatchRelay() {
+        return ((bitField0_ & 0x00000002) != 0);
+      }
+      /**
+       * <code>optional int32 unlatch_relay = 2;</code>
+       * @return The unlatchRelay.
+       */
+      @java.lang.Override
+      public int getUnlatchRelay() {
+        return unlatchRelay_;
+      }
+      /**
+       * <code>optional int32 unlatch_relay = 2;</code>
+       * @param value The unlatchRelay to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUnlatchRelay(int value) {
+        bitField0_ |= 0x00000002;
+        unlatchRelay_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 unlatch_relay = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearUnlatchRelay() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        unlatchRelay_ = 0;
+        onChanged();
+        return this;
+      }
+
       private boolean chime_ ;
       /**
-       * <code>optional bool chime = 2;</code>
+       * <code>optional bool chime = 3;</code>
        * @return Whether the chime field is set.
        */
       @java.lang.Override
       public boolean hasChime() {
-        return ((bitField0_ & 0x00000002) != 0);
+        return ((bitField0_ & 0x00000004) != 0);
       }
       /**
-       * <code>optional bool chime = 2;</code>
+       * <code>optional bool chime = 3;</code>
        * @return The chime.
        */
       @java.lang.Override
@@ -763,22 +1042,22 @@ public final class Proto {
         return chime_;
       }
       /**
-       * <code>optional bool chime = 2;</code>
+       * <code>optional bool chime = 3;</code>
        * @param value The chime to set.
        * @return This builder for chaining.
        */
       public Builder setChime(boolean value) {
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000004;
         chime_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional bool chime = 2;</code>
+       * <code>optional bool chime = 3;</code>
        * @return This builder for chaining.
        */
       public Builder clearChime() {
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000004);
         chime_ = false;
         onChanged();
         return this;
@@ -786,15 +1065,15 @@ public final class Proto {
 
       private boolean testConnection_ ;
       /**
-       * <code>optional bool test_connection = 3;</code>
+       * <code>optional bool test_connection = 4;</code>
        * @return Whether the testConnection field is set.
        */
       @java.lang.Override
       public boolean hasTestConnection() {
-        return ((bitField0_ & 0x00000004) != 0);
+        return ((bitField0_ & 0x00000008) != 0);
       }
       /**
-       * <code>optional bool test_connection = 3;</code>
+       * <code>optional bool test_connection = 4;</code>
        * @return The testConnection.
        */
       @java.lang.Override
@@ -802,23 +1081,140 @@ public final class Proto {
         return testConnection_;
       }
       /**
-       * <code>optional bool test_connection = 3;</code>
+       * <code>optional bool test_connection = 4;</code>
        * @param value The testConnection to set.
        * @return This builder for chaining.
        */
       public Builder setTestConnection(boolean value) {
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         testConnection_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional bool test_connection = 3;</code>
+       * <code>optional bool test_connection = 4;</code>
        * @return This builder for chaining.
        */
       public Builder clearTestConnection() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000008);
         testConnection_ = false;
+        onChanged();
+        return this;
+      }
+
+      private int chimeLatchOneDurationMs_ ;
+      /**
+       * <code>optional int32 chime_latch_one_duration_ms = 5;</code>
+       * @return Whether the chimeLatchOneDurationMs field is set.
+       */
+      @java.lang.Override
+      public boolean hasChimeLatchOneDurationMs() {
+        return ((bitField0_ & 0x00000010) != 0);
+      }
+      /**
+       * <code>optional int32 chime_latch_one_duration_ms = 5;</code>
+       * @return The chimeLatchOneDurationMs.
+       */
+      @java.lang.Override
+      public int getChimeLatchOneDurationMs() {
+        return chimeLatchOneDurationMs_;
+      }
+      /**
+       * <code>optional int32 chime_latch_one_duration_ms = 5;</code>
+       * @param value The chimeLatchOneDurationMs to set.
+       * @return This builder for chaining.
+       */
+      public Builder setChimeLatchOneDurationMs(int value) {
+        bitField0_ |= 0x00000010;
+        chimeLatchOneDurationMs_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 chime_latch_one_duration_ms = 5;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearChimeLatchOneDurationMs() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        chimeLatchOneDurationMs_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int chimePauseDurationMs_ ;
+      /**
+       * <code>optional int32 chime_pause_duration_ms = 6;</code>
+       * @return Whether the chimePauseDurationMs field is set.
+       */
+      @java.lang.Override
+      public boolean hasChimePauseDurationMs() {
+        return ((bitField0_ & 0x00000020) != 0);
+      }
+      /**
+       * <code>optional int32 chime_pause_duration_ms = 6;</code>
+       * @return The chimePauseDurationMs.
+       */
+      @java.lang.Override
+      public int getChimePauseDurationMs() {
+        return chimePauseDurationMs_;
+      }
+      /**
+       * <code>optional int32 chime_pause_duration_ms = 6;</code>
+       * @param value The chimePauseDurationMs to set.
+       * @return This builder for chaining.
+       */
+      public Builder setChimePauseDurationMs(int value) {
+        bitField0_ |= 0x00000020;
+        chimePauseDurationMs_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 chime_pause_duration_ms = 6;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearChimePauseDurationMs() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        chimePauseDurationMs_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int chimeLatchTwoDurationMs_ ;
+      /**
+       * <code>optional int32 chime_latch_two_duration_ms = 7;</code>
+       * @return Whether the chimeLatchTwoDurationMs field is set.
+       */
+      @java.lang.Override
+      public boolean hasChimeLatchTwoDurationMs() {
+        return ((bitField0_ & 0x00000040) != 0);
+      }
+      /**
+       * <code>optional int32 chime_latch_two_duration_ms = 7;</code>
+       * @return The chimeLatchTwoDurationMs.
+       */
+      @java.lang.Override
+      public int getChimeLatchTwoDurationMs() {
+        return chimeLatchTwoDurationMs_;
+      }
+      /**
+       * <code>optional int32 chime_latch_two_duration_ms = 7;</code>
+       * @param value The chimeLatchTwoDurationMs to set.
+       * @return This builder for chaining.
+       */
+      public Builder setChimeLatchTwoDurationMs(int value) {
+        bitField0_ |= 0x00000040;
+        chimeLatchTwoDurationMs_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 chime_latch_two_duration_ms = 7;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearChimeLatchTwoDurationMs() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        chimeLatchTwoDurationMs_ = 0;
         onChanged();
         return this;
       }
@@ -4108,22 +4504,25 @@ public final class Proto {
   static {
     java.lang.String[] descriptorData = {
       "\n\026src/proto/deagan.proto\022\030org.spcgreenvi" +
-      "lle.deagan\"F\n\007Request\022\023\n\013latch_relay\030\001 \001" +
-      "(\005\022\r\n\005chime\030\002 \001(\010\022\027\n\017test_connection\030\003 \001" +
-      "(\010\"T\n\010Response\0220\n\006status\030\001 \001(\0162 .org.spc" +
-      "greenville.deagan.Status\022\026\n\016status_messa" +
-      "ge\030\002 \001(\t\"1\n\tLocalTime\022\014\n\004hour\030\001 \001(\r\022\026\n\016m" +
-      "inute_of_hour\030\002 \001(\r\"\206\002\n\006Config\022=\n\020daily_" +
-      "start_time\030\001 \001(\0132#.org.spcgreenville.dea" +
-      "gan.LocalTime\022;\n\016daily_end_time\030\002 \001(\0132#." +
-      "org.spcgreenville.deagan.LocalTime\022\037\n\027en" +
-      "able_hour_count_chime\030\003 \001(\010\022\033\n\023midi_file" +
-      "_directory\030\004 \001(\t\022\022\n\ngpio_label\030\005 \001(\t\022\030\n\020" +
-      "control_hostname\030\006 \001(\t\022\024\n\014control_port\030\007" +
-      " \001(\005*g\n\006Status\022\022\n\016STATUS_SUCCESS\020\000\022\030\n\024ST" +
-      "ATUS_NOT_AVAILABLE\020\001\022\027\n\023STATUS_SERVER_ER" +
-      "ROR\020\002\022\026\n\022STATUS_BAD_REQUEST\020\003B!\n\030org.spc" +
-      "greenville.deaganB\005Proto"
+      "lle.deagan\"\310\001\n\007Request\022\023\n\013latch_relay\030\001 " +
+      "\001(\005\022\025\n\runlatch_relay\030\002 \001(\005\022\r\n\005chime\030\003 \001(" +
+      "\010\022\027\n\017test_connection\030\004 \001(\010\022#\n\033chime_latc" +
+      "h_one_duration_ms\030\005 \001(\005\022\037\n\027chime_pause_d" +
+      "uration_ms\030\006 \001(\005\022#\n\033chime_latch_two_dura" +
+      "tion_ms\030\007 \001(\005\"T\n\010Response\0220\n\006status\030\001 \001(" +
+      "\0162 .org.spcgreenville.deagan.Status\022\026\n\016s" +
+      "tatus_message\030\002 \001(\t\"1\n\tLocalTime\022\014\n\004hour" +
+      "\030\001 \001(\r\022\026\n\016minute_of_hour\030\002 \001(\r\"\206\002\n\006Confi" +
+      "g\022=\n\020daily_start_time\030\001 \001(\0132#.org.spcgre" +
+      "enville.deagan.LocalTime\022;\n\016daily_end_ti" +
+      "me\030\002 \001(\0132#.org.spcgreenville.deagan.Loca" +
+      "lTime\022\037\n\027enable_hour_count_chime\030\003 \001(\010\022\033" +
+      "\n\023midi_file_directory\030\004 \001(\t\022\022\n\ngpio_labe" +
+      "l\030\005 \001(\t\022\030\n\020control_hostname\030\006 \001(\t\022\024\n\014con" +
+      "trol_port\030\007 \001(\005*g\n\006Status\022\022\n\016STATUS_SUCC" +
+      "ESS\020\000\022\030\n\024STATUS_NOT_AVAILABLE\020\001\022\027\n\023STATU" +
+      "S_SERVER_ERROR\020\002\022\026\n\022STATUS_BAD_REQUEST\020\003" +
+      "B!\n\030org.spcgreenville.deaganB\005Proto"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -4134,7 +4533,7 @@ public final class Proto {
     internal_static_org_spcgreenville_deagan_Request_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_org_spcgreenville_deagan_Request_descriptor,
-        new java.lang.String[] { "LatchRelay", "Chime", "TestConnection", });
+        new java.lang.String[] { "LatchRelay", "UnlatchRelay", "Chime", "TestConnection", "ChimeLatchOneDurationMs", "ChimePauseDurationMs", "ChimeLatchTwoDurationMs", });
     internal_static_org_spcgreenville_deagan_Response_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_org_spcgreenville_deagan_Response_fieldAccessorTable = new

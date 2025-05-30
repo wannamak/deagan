@@ -47,6 +47,7 @@
         <path location="${classes-destination}"/>
       </classpath>
       <sysproperty key="java.util.logging.config.file" value="logging.properties"/>
+      <sysproperty key="com.google.protobuf.use_unsafe_pre22_gencode" value="" />
       <arg value="config.txt" />
     </java>
   </target>

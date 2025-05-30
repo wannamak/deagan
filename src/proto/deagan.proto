@@ -7,8 +7,12 @@ option java_outer_classname = "Proto";
 
 message Request {
   optional int32 latch_relay = 1;
-  optional bool chime = 2;
-  optional bool test_connection = 3;
+  optional int32 unlatch_relay = 2;
+  optional bool chime = 3;
+  optional bool test_connection = 4;
+  optional int32 chime_latch_one_duration_ms = 5;
+  optional int32 chime_pause_duration_ms = 6;
+  optional int32 chime_latch_two_duration_ms = 7;
 }
 
 message Response {
