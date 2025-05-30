@@ -35,7 +35,7 @@ public class ReplThread extends Thread {
     } else if (request.getTestConnection()) {
       responseBuilder.setStatusMessage("Test successful " + sequence++);
     } else {
-      responseBuilder.setStatus(Proto.Status.)
+      responseBuilder.setStatus(Proto.Status.STATUS_BAD_REQUEST);
     }
     return responseBuilder.build();
   }
@@ -56,7 +56,9 @@ public class ReplThread extends Thread {
             break;
           }
           Proto.Request request = Proto.Request.parseFrom(b);
+          logger.fine(request.toString());
           Proto.Response response = getResponse(request);
+          logger.fine(response.toString());
           b = response.toByteArray();
           outputStream.writeInt(b.length);
           outputStream.write(b);
