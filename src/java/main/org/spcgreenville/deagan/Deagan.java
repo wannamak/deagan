@@ -1,18 +1,15 @@
 package org.spcgreenville.deagan;
 
-import com.google.common.base.Preconditions;
 import com.google.protobuf.TextFormat;
 import org.spcgreenville.deagan.hourly.ChimeSchedulerThread;
 import org.spcgreenville.deagan.logical.Notes;
 import org.spcgreenville.deagan.logical.RaspberryRelays;
 import org.spcgreenville.deagan.logical.Relays;
 import org.spcgreenville.deagan.midi.MidiFileDatabase;
-import org.spcgreenville.deagan.physical.GPIOChipInfoProvider;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.logging.Logger;
 
 public class Deagan {
@@ -39,12 +36,7 @@ public class Deagan {
     }
     this.config = configBuilder.build();
 
-    GPIOChipInfoProvider gpioManager = new GPIOChipInfoProvider();
-    Path gpioDevicePath = gpioManager.getDevicePathForLabel(config.getGpioLabel());
-    Preconditions.checkNotNull(
-        gpioDevicePath, "No device for label " + config.getGpioLabel());
-
-    Relays relays = new RaspberryRelays(gpioDevicePath);
+    Relays relays = new RaspberryRelays();
     relays.initialize();
     this.notes = new Notes(relays);
     this.database = new MidiFileDatabase();

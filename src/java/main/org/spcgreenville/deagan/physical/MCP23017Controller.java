@@ -6,9 +6,11 @@ public class MCP23017Controller {
 
   private final Logger logger = Logger.getLogger(MCP23017Controller.class.getName());
   private final SystemManagementBus bus;
+  private final int deviceId;
 
   // default
-  private static final int MCP_23017_EXPANDER_BOARD_DEVICE_ID = 0x27;
+  public static final int FIRST_MCP_23017_EXPANDER_BOARD_DEVICE_ID = 0x27;
+  public static final int SECOND_MCP_23017_EXPANDER_BOARD_DEVICE_ID = 0x28;
 
   private static final int NUM_OUTPUTS = 16;
 
@@ -74,14 +76,14 @@ public class MCP23017Controller {
       new Output(MCP23017_REGISTER_B_BIT, 128),
   };
 
-  public MCP23017Controller() {
+  public MCP23017Controller(int deviceId) {
     this.bus = new SystemManagementBus();
+    this.deviceId = deviceId;
   }
 
   public void initialize() {
-    bus.initialize(MCP_23017_EXPANDER_BOARD_DEVICE_ID);
+    bus.initialize(deviceId);
     initializeRegisters();
-    //initializeDirectionRegister();
   }
 
   public enum Value {

@@ -260,79 +260,6 @@ public final class Proto {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private Request(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 8: {
-              bitField0_ |= 0x00000001;
-              latchRelay_ = input.readInt32();
-              break;
-            }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              unlatchRelay_ = input.readInt32();
-              break;
-            }
-            case 24: {
-              bitField0_ |= 0x00000004;
-              chime_ = input.readBool();
-              break;
-            }
-            case 32: {
-              bitField0_ |= 0x00000008;
-              testConnection_ = input.readBool();
-              break;
-            }
-            case 40: {
-              bitField0_ |= 0x00000010;
-              chimeLatchOneDurationMs_ = input.readInt32();
-              break;
-            }
-            case 48: {
-              bitField0_ |= 0x00000020;
-              chimePauseDurationMs_ = input.readInt32();
-              break;
-            }
-            case 56: {
-              bitField0_ |= 0x00000040;
-              chimeLatchTwoDurationMs_ = input.readInt32();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return org.spcgreenville.deagan.Proto.internal_static_org_spcgreenville_deagan_Request_descriptor;
@@ -348,7 +275,7 @@ public final class Proto {
 
     private int bitField0_;
     public static final int LATCH_RELAY_FIELD_NUMBER = 1;
-    private int latchRelay_;
+    private int latchRelay_ = 0;
     /**
      * <code>optional int32 latch_relay = 1;</code>
      * @return Whether the latchRelay field is set.
@@ -367,7 +294,7 @@ public final class Proto {
     }
 
     public static final int UNLATCH_RELAY_FIELD_NUMBER = 2;
-    private int unlatchRelay_;
+    private int unlatchRelay_ = 0;
     /**
      * <code>optional int32 unlatch_relay = 2;</code>
      * @return Whether the unlatchRelay field is set.
@@ -386,7 +313,7 @@ public final class Proto {
     }
 
     public static final int CHIME_FIELD_NUMBER = 3;
-    private boolean chime_;
+    private boolean chime_ = false;
     /**
      * <code>optional bool chime = 3;</code>
      * @return Whether the chime field is set.
@@ -405,7 +332,7 @@ public final class Proto {
     }
 
     public static final int TEST_CONNECTION_FIELD_NUMBER = 4;
-    private boolean testConnection_;
+    private boolean testConnection_ = false;
     /**
      * <code>optional bool test_connection = 4;</code>
      * @return Whether the testConnection field is set.
@@ -424,7 +351,7 @@ public final class Proto {
     }
 
     public static final int CHIME_LATCH_ONE_DURATION_MS_FIELD_NUMBER = 5;
-    private int chimeLatchOneDurationMs_;
+    private int chimeLatchOneDurationMs_ = 0;
     /**
      * <code>optional int32 chime_latch_one_duration_ms = 5;</code>
      * @return Whether the chimeLatchOneDurationMs field is set.
@@ -443,7 +370,7 @@ public final class Proto {
     }
 
     public static final int CHIME_PAUSE_DURATION_MS_FIELD_NUMBER = 6;
-    private int chimePauseDurationMs_;
+    private int chimePauseDurationMs_ = 0;
     /**
      * <code>optional int32 chime_pause_duration_ms = 6;</code>
      * @return Whether the chimePauseDurationMs field is set.
@@ -462,7 +389,7 @@ public final class Proto {
     }
 
     public static final int CHIME_LATCH_TWO_DURATION_MS_FIELD_NUMBER = 7;
-    private int chimeLatchTwoDurationMs_;
+    private int chimeLatchTwoDurationMs_ = 0;
     /**
      * <code>optional int32 chime_latch_two_duration_ms = 7;</code>
      * @return Whether the chimeLatchTwoDurationMs field is set.
@@ -515,7 +442,7 @@ public final class Proto {
       if (((bitField0_ & 0x00000040) != 0)) {
         output.writeInt32(7, chimeLatchTwoDurationMs_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -552,7 +479,7 @@ public final class Proto {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(7, chimeLatchTwoDurationMs_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -602,7 +529,7 @@ public final class Proto {
         if (getChimeLatchTwoDurationMs()
             != other.getChimeLatchTwoDurationMs()) return false;
       }
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -643,7 +570,7 @@ public final class Proto {
         hash = (37 * hash) + CHIME_LATCH_TWO_DURATION_MS_FIELD_NUMBER;
         hash = (53 * hash) + getChimeLatchTwoDurationMs();
       }
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -760,36 +687,25 @@ public final class Proto {
 
       // Construct using org.spcgreenville.deagan.Proto.Request.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         latchRelay_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
         unlatchRelay_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000002);
         chime_ = false;
-        bitField0_ = (bitField0_ & ~0x00000004);
         testConnection_ = false;
-        bitField0_ = (bitField0_ & ~0x00000008);
         chimeLatchOneDurationMs_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000010);
         chimePauseDurationMs_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000020);
         chimeLatchTwoDurationMs_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -816,6 +732,12 @@ public final class Proto {
       @java.lang.Override
       public org.spcgreenville.deagan.Proto.Request buildPartial() {
         org.spcgreenville.deagan.Proto.Request result = new org.spcgreenville.deagan.Proto.Request(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        onBuilt();
+        return result;
+      }
+
+      private void buildPartial0(org.spcgreenville.deagan.Proto.Request result) {
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) != 0)) {
@@ -846,9 +768,7 @@ public final class Proto {
           result.chimeLatchTwoDurationMs_ = chimeLatchTwoDurationMs_;
           to_bitField0_ |= 0x00000040;
         }
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
+        result.bitField0_ |= to_bitField0_;
       }
 
       @java.lang.Override
@@ -916,7 +836,7 @@ public final class Proto {
         if (other.hasChimeLatchTwoDurationMs()) {
           setChimeLatchTwoDurationMs(other.getChimeLatchTwoDurationMs());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -931,17 +851,65 @@ public final class Proto {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        org.spcgreenville.deagan.Proto.Request parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 8: {
+                latchRelay_ = input.readInt32();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 8
+              case 16: {
+                unlatchRelay_ = input.readInt32();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 16
+              case 24: {
+                chime_ = input.readBool();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 24
+              case 32: {
+                testConnection_ = input.readBool();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 32
+              case 40: {
+                chimeLatchOneDurationMs_ = input.readInt32();
+                bitField0_ |= 0x00000010;
+                break;
+              } // case 40
+              case 48: {
+                chimePauseDurationMs_ = input.readInt32();
+                bitField0_ |= 0x00000020;
+                break;
+              } // case 48
+              case 56: {
+                chimeLatchTwoDurationMs_ = input.readInt32();
+                bitField0_ |= 0x00000040;
+                break;
+              } // case 56
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (org.spcgreenville.deagan.Proto.Request) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
       private int bitField0_;
@@ -969,8 +937,9 @@ public final class Proto {
        * @return This builder for chaining.
        */
       public Builder setLatchRelay(int value) {
-        bitField0_ |= 0x00000001;
+        
         latchRelay_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -1008,8 +977,9 @@ public final class Proto {
        * @return This builder for chaining.
        */
       public Builder setUnlatchRelay(int value) {
-        bitField0_ |= 0x00000002;
+        
         unlatchRelay_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -1047,8 +1017,9 @@ public final class Proto {
        * @return This builder for chaining.
        */
       public Builder setChime(boolean value) {
-        bitField0_ |= 0x00000004;
+        
         chime_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -1086,8 +1057,9 @@ public final class Proto {
        * @return This builder for chaining.
        */
       public Builder setTestConnection(boolean value) {
-        bitField0_ |= 0x00000008;
+        
         testConnection_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -1125,8 +1097,9 @@ public final class Proto {
        * @return This builder for chaining.
        */
       public Builder setChimeLatchOneDurationMs(int value) {
-        bitField0_ |= 0x00000010;
+        
         chimeLatchOneDurationMs_ = value;
+        bitField0_ |= 0x00000010;
         onChanged();
         return this;
       }
@@ -1164,8 +1137,9 @@ public final class Proto {
        * @return This builder for chaining.
        */
       public Builder setChimePauseDurationMs(int value) {
-        bitField0_ |= 0x00000020;
+        
         chimePauseDurationMs_ = value;
+        bitField0_ |= 0x00000020;
         onChanged();
         return this;
       }
@@ -1203,8 +1177,9 @@ public final class Proto {
        * @return This builder for chaining.
        */
       public Builder setChimeLatchTwoDurationMs(int value) {
-        bitField0_ |= 0x00000040;
+        
         chimeLatchTwoDurationMs_ = value;
+        bitField0_ |= 0x00000040;
         onChanged();
         return this;
       }
@@ -1251,7 +1226,18 @@ public final class Proto {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new Request(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -1332,62 +1318,6 @@ public final class Proto {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private Response(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 8: {
-              int rawValue = input.readEnum();
-                @SuppressWarnings("deprecation")
-              org.spcgreenville.deagan.Proto.Status value = org.spcgreenville.deagan.Proto.Status.valueOf(rawValue);
-              if (value == null) {
-                unknownFields.mergeVarintField(1, rawValue);
-              } else {
-                bitField0_ |= 0x00000001;
-                status_ = rawValue;
-              }
-              break;
-            }
-            case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000002;
-              statusMessage_ = bs;
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return org.spcgreenville.deagan.Proto.internal_static_org_spcgreenville_deagan_Response_descriptor;
@@ -1403,7 +1333,7 @@ public final class Proto {
 
     private int bitField0_;
     public static final int STATUS_FIELD_NUMBER = 1;
-    private int status_;
+    private int status_ = 0;
     /**
      * <code>optional .org.spcgreenville.deagan.Status status = 1;</code>
      * @return Whether the status field is set.
@@ -1416,13 +1346,13 @@ public final class Proto {
      * @return The status.
      */
     @java.lang.Override public org.spcgreenville.deagan.Proto.Status getStatus() {
-      @SuppressWarnings("deprecation")
-      org.spcgreenville.deagan.Proto.Status result = org.spcgreenville.deagan.Proto.Status.valueOf(status_);
+      org.spcgreenville.deagan.Proto.Status result = org.spcgreenville.deagan.Proto.Status.forNumber(status_);
       return result == null ? org.spcgreenville.deagan.Proto.Status.STATUS_SUCCESS : result;
     }
 
     public static final int STATUS_MESSAGE_FIELD_NUMBER = 2;
-    private volatile java.lang.Object statusMessage_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object statusMessage_ = "";
     /**
      * <code>optional string status_message = 2;</code>
      * @return Whether the statusMessage field is set.
@@ -1489,7 +1419,7 @@ public final class Proto {
       if (((bitField0_ & 0x00000002) != 0)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, statusMessage_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -1505,7 +1435,7 @@ public final class Proto {
       if (((bitField0_ & 0x00000002) != 0)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, statusMessage_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -1529,7 +1459,7 @@ public final class Proto {
         if (!getStatusMessage()
             .equals(other.getStatusMessage())) return false;
       }
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -1548,7 +1478,7 @@ public final class Proto {
         hash = (37 * hash) + STATUS_MESSAGE_FIELD_NUMBER;
         hash = (53 * hash) + getStatusMessage().hashCode();
       }
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -1665,26 +1595,20 @@ public final class Proto {
 
       // Construct using org.spcgreenville.deagan.Proto.Response.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         status_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
         statusMessage_ = "";
-        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -1711,19 +1635,23 @@ public final class Proto {
       @java.lang.Override
       public org.spcgreenville.deagan.Proto.Response buildPartial() {
         org.spcgreenville.deagan.Proto.Response result = new org.spcgreenville.deagan.Proto.Response(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        onBuilt();
+        return result;
+      }
+
+      private void buildPartial0(org.spcgreenville.deagan.Proto.Response result) {
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.status_ = status_;
           to_bitField0_ |= 0x00000001;
         }
-        result.status_ = status_;
         if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.statusMessage_ = statusMessage_;
           to_bitField0_ |= 0x00000002;
         }
-        result.statusMessage_ = statusMessage_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
+        result.bitField0_ |= to_bitField0_;
       }
 
       @java.lang.Override
@@ -1774,11 +1702,11 @@ public final class Proto {
           setStatus(other.getStatus());
         }
         if (other.hasStatusMessage()) {
-          bitField0_ |= 0x00000002;
           statusMessage_ = other.statusMessage_;
+          bitField0_ |= 0x00000002;
           onChanged();
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -1793,17 +1721,47 @@ public final class Proto {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        org.spcgreenville.deagan.Proto.Response parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 8: {
+                int tmpRaw = input.readEnum();
+                org.spcgreenville.deagan.Proto.Status tmpValue =
+                    org.spcgreenville.deagan.Proto.Status.forNumber(tmpRaw);
+                if (tmpValue == null) {
+                  mergeUnknownVarintField(1, tmpRaw);
+                } else {
+                  status_ = tmpRaw;
+                  bitField0_ |= 0x00000001;
+                }
+                break;
+              } // case 8
+              case 18: {
+                statusMessage_ = input.readBytes();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (org.spcgreenville.deagan.Proto.Response) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
       private int bitField0_;
@@ -1822,8 +1780,7 @@ public final class Proto {
        */
       @java.lang.Override
       public org.spcgreenville.deagan.Proto.Status getStatus() {
-        @SuppressWarnings("deprecation")
-        org.spcgreenville.deagan.Proto.Status result = org.spcgreenville.deagan.Proto.Status.valueOf(status_);
+        org.spcgreenville.deagan.Proto.Status result = org.spcgreenville.deagan.Proto.Status.forNumber(status_);
         return result == null ? org.spcgreenville.deagan.Proto.Status.STATUS_SUCCESS : result;
       }
       /**
@@ -1901,11 +1858,9 @@ public final class Proto {
        */
       public Builder setStatusMessage(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
+        if (value == null) { throw new NullPointerException(); }
         statusMessage_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -1914,8 +1869,8 @@ public final class Proto {
        * @return This builder for chaining.
        */
       public Builder clearStatusMessage() {
-        bitField0_ = (bitField0_ & ~0x00000002);
         statusMessage_ = getDefaultInstance().getStatusMessage();
+        bitField0_ = (bitField0_ & ~0x00000002);
         onChanged();
         return this;
       }
@@ -1926,11 +1881,9 @@ public final class Proto {
        */
       public Builder setStatusMessageBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
+        if (value == null) { throw new NullPointerException(); }
         statusMessage_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -1967,7 +1920,18 @@ public final class Proto {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new Response(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -2048,54 +2012,6 @@ public final class Proto {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private LocalTime(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 8: {
-              bitField0_ |= 0x00000001;
-              hour_ = input.readUInt32();
-              break;
-            }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              minuteOfHour_ = input.readUInt32();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return org.spcgreenville.deagan.Proto.internal_static_org_spcgreenville_deagan_LocalTime_descriptor;
@@ -2111,7 +2027,7 @@ public final class Proto {
 
     private int bitField0_;
     public static final int HOUR_FIELD_NUMBER = 1;
-    private int hour_;
+    private int hour_ = 0;
     /**
      * <pre>
      * 24-hour format
@@ -2138,7 +2054,7 @@ public final class Proto {
     }
 
     public static final int MINUTE_OF_HOUR_FIELD_NUMBER = 2;
-    private int minuteOfHour_;
+    private int minuteOfHour_ = 0;
     /**
      * <code>optional uint32 minute_of_hour = 2;</code>
      * @return Whether the minuteOfHour field is set.
@@ -2176,7 +2092,7 @@ public final class Proto {
       if (((bitField0_ & 0x00000002) != 0)) {
         output.writeUInt32(2, minuteOfHour_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -2193,7 +2109,7 @@ public final class Proto {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(2, minuteOfHour_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -2218,7 +2134,7 @@ public final class Proto {
         if (getMinuteOfHour()
             != other.getMinuteOfHour()) return false;
       }
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -2237,7 +2153,7 @@ public final class Proto {
         hash = (37 * hash) + MINUTE_OF_HOUR_FIELD_NUMBER;
         hash = (53 * hash) + getMinuteOfHour();
       }
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -2354,26 +2270,20 @@ public final class Proto {
 
       // Construct using org.spcgreenville.deagan.Proto.LocalTime.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         hour_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
         minuteOfHour_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -2400,6 +2310,12 @@ public final class Proto {
       @java.lang.Override
       public org.spcgreenville.deagan.Proto.LocalTime buildPartial() {
         org.spcgreenville.deagan.Proto.LocalTime result = new org.spcgreenville.deagan.Proto.LocalTime(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        onBuilt();
+        return result;
+      }
+
+      private void buildPartial0(org.spcgreenville.deagan.Proto.LocalTime result) {
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) != 0)) {
@@ -2410,9 +2326,7 @@ public final class Proto {
           result.minuteOfHour_ = minuteOfHour_;
           to_bitField0_ |= 0x00000002;
         }
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
+        result.bitField0_ |= to_bitField0_;
       }
 
       @java.lang.Override
@@ -2465,7 +2379,7 @@ public final class Proto {
         if (other.hasMinuteOfHour()) {
           setMinuteOfHour(other.getMinuteOfHour());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -2480,17 +2394,40 @@ public final class Proto {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        org.spcgreenville.deagan.Proto.LocalTime parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 8: {
+                hour_ = input.readUInt32();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 8
+              case 16: {
+                minuteOfHour_ = input.readUInt32();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 16
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (org.spcgreenville.deagan.Proto.LocalTime) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
       private int bitField0_;
@@ -2530,8 +2467,9 @@ public final class Proto {
        * @return This builder for chaining.
        */
       public Builder setHour(int value) {
-        bitField0_ |= 0x00000001;
+        
         hour_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -2573,8 +2511,9 @@ public final class Proto {
        * @return This builder for chaining.
        */
       public Builder setMinuteOfHour(int value) {
-        bitField0_ |= 0x00000002;
+        
         minuteOfHour_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -2621,7 +2560,18 @@ public final class Proto {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new LocalTime(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -2834,98 +2784,6 @@ public final class Proto {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private Config(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              org.spcgreenville.deagan.Proto.LocalTime.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000001) != 0)) {
-                subBuilder = dailyStartTime_.toBuilder();
-              }
-              dailyStartTime_ = input.readMessage(org.spcgreenville.deagan.Proto.LocalTime.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(dailyStartTime_);
-                dailyStartTime_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000001;
-              break;
-            }
-            case 18: {
-              org.spcgreenville.deagan.Proto.LocalTime.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000002) != 0)) {
-                subBuilder = dailyEndTime_.toBuilder();
-              }
-              dailyEndTime_ = input.readMessage(org.spcgreenville.deagan.Proto.LocalTime.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(dailyEndTime_);
-                dailyEndTime_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000002;
-              break;
-            }
-            case 24: {
-              bitField0_ |= 0x00000004;
-              enableHourCountChime_ = input.readBool();
-              break;
-            }
-            case 34: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000008;
-              midiFileDirectory_ = bs;
-              break;
-            }
-            case 42: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000010;
-              gpioLabel_ = bs;
-              break;
-            }
-            case 50: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000020;
-              controlHostname_ = bs;
-              break;
-            }
-            case 56: {
-              bitField0_ |= 0x00000040;
-              controlPort_ = input.readInt32();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return org.spcgreenville.deagan.Proto.internal_static_org_spcgreenville_deagan_Config_descriptor;
@@ -3017,7 +2875,7 @@ public final class Proto {
     }
 
     public static final int ENABLE_HOUR_COUNT_CHIME_FIELD_NUMBER = 3;
-    private boolean enableHourCountChime_;
+    private boolean enableHourCountChime_ = false;
     /**
      * <pre>
      * Controls the "hour count" chime which follows the tune.
@@ -3044,7 +2902,8 @@ public final class Proto {
     }
 
     public static final int MIDI_FILE_DIRECTORY_FIELD_NUMBER = 4;
-    private volatile java.lang.Object midiFileDirectory_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object midiFileDirectory_ = "";
     /**
      * <pre>
      * Directory of Midi files.
@@ -3104,7 +2963,8 @@ public final class Proto {
     }
 
     public static final int GPIO_LABEL_FIELD_NUMBER = 5;
-    private volatile java.lang.Object gpioLabel_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object gpioLabel_ = "";
     /**
      * <pre>
      * Device label for GPIO controller.  Use "pinctrl-bcm2711" for Raspberry PI.
@@ -3164,7 +3024,8 @@ public final class Proto {
     }
 
     public static final int CONTROL_HOSTNAME_FIELD_NUMBER = 6;
-    private volatile java.lang.Object controlHostname_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object controlHostname_ = "";
     /**
      * <code>optional string control_hostname = 6;</code>
      * @return Whether the controlHostname field is set.
@@ -3212,7 +3073,7 @@ public final class Proto {
     }
 
     public static final int CONTROL_PORT_FIELD_NUMBER = 7;
-    private int controlPort_;
+    private int controlPort_ = 0;
     /**
      * <code>optional int32 control_port = 7;</code>
      * @return Whether the controlPort field is set.
@@ -3265,7 +3126,7 @@ public final class Proto {
       if (((bitField0_ & 0x00000040) != 0)) {
         output.writeInt32(7, controlPort_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -3299,7 +3160,7 @@ public final class Proto {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(7, controlPort_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -3349,7 +3210,7 @@ public final class Proto {
         if (getControlPort()
             != other.getControlPort()) return false;
       }
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -3389,7 +3250,7 @@ public final class Proto {
         hash = (37 * hash) + CONTROL_PORT_FIELD_NUMBER;
         hash = (53 * hash) + getControlPort();
       }
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -3524,28 +3385,22 @@ public final class Proto {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        if (dailyStartTimeBuilder_ == null) {
-          dailyStartTime_ = null;
-        } else {
-          dailyStartTimeBuilder_.clear();
+        bitField0_ = 0;
+        dailyStartTime_ = null;
+        if (dailyStartTimeBuilder_ != null) {
+          dailyStartTimeBuilder_.dispose();
+          dailyStartTimeBuilder_ = null;
         }
-        bitField0_ = (bitField0_ & ~0x00000001);
-        if (dailyEndTimeBuilder_ == null) {
-          dailyEndTime_ = null;
-        } else {
-          dailyEndTimeBuilder_.clear();
+        dailyEndTime_ = null;
+        if (dailyEndTimeBuilder_ != null) {
+          dailyEndTimeBuilder_.dispose();
+          dailyEndTimeBuilder_ = null;
         }
-        bitField0_ = (bitField0_ & ~0x00000002);
         enableHourCountChime_ = false;
-        bitField0_ = (bitField0_ & ~0x00000004);
         midiFileDirectory_ = "";
-        bitField0_ = (bitField0_ & ~0x00000008);
         gpioLabel_ = "";
-        bitField0_ = (bitField0_ & ~0x00000010);
         controlHostname_ = "";
-        bitField0_ = (bitField0_ & ~0x00000020);
         controlPort_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -3572,22 +3427,24 @@ public final class Proto {
       @java.lang.Override
       public org.spcgreenville.deagan.Proto.Config buildPartial() {
         org.spcgreenville.deagan.Proto.Config result = new org.spcgreenville.deagan.Proto.Config(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        onBuilt();
+        return result;
+      }
+
+      private void buildPartial0(org.spcgreenville.deagan.Proto.Config result) {
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) != 0)) {
-          if (dailyStartTimeBuilder_ == null) {
-            result.dailyStartTime_ = dailyStartTime_;
-          } else {
-            result.dailyStartTime_ = dailyStartTimeBuilder_.build();
-          }
+          result.dailyStartTime_ = dailyStartTimeBuilder_ == null
+              ? dailyStartTime_
+              : dailyStartTimeBuilder_.build();
           to_bitField0_ |= 0x00000001;
         }
         if (((from_bitField0_ & 0x00000002) != 0)) {
-          if (dailyEndTimeBuilder_ == null) {
-            result.dailyEndTime_ = dailyEndTime_;
-          } else {
-            result.dailyEndTime_ = dailyEndTimeBuilder_.build();
-          }
+          result.dailyEndTime_ = dailyEndTimeBuilder_ == null
+              ? dailyEndTime_
+              : dailyEndTimeBuilder_.build();
           to_bitField0_ |= 0x00000002;
         }
         if (((from_bitField0_ & 0x00000004) != 0)) {
@@ -3595,24 +3452,22 @@ public final class Proto {
           to_bitField0_ |= 0x00000004;
         }
         if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.midiFileDirectory_ = midiFileDirectory_;
           to_bitField0_ |= 0x00000008;
         }
-        result.midiFileDirectory_ = midiFileDirectory_;
         if (((from_bitField0_ & 0x00000010) != 0)) {
+          result.gpioLabel_ = gpioLabel_;
           to_bitField0_ |= 0x00000010;
         }
-        result.gpioLabel_ = gpioLabel_;
         if (((from_bitField0_ & 0x00000020) != 0)) {
+          result.controlHostname_ = controlHostname_;
           to_bitField0_ |= 0x00000020;
         }
-        result.controlHostname_ = controlHostname_;
         if (((from_bitField0_ & 0x00000040) != 0)) {
           result.controlPort_ = controlPort_;
           to_bitField0_ |= 0x00000040;
         }
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
+        result.bitField0_ |= to_bitField0_;
       }
 
       @java.lang.Override
@@ -3669,24 +3524,24 @@ public final class Proto {
           setEnableHourCountChime(other.getEnableHourCountChime());
         }
         if (other.hasMidiFileDirectory()) {
-          bitField0_ |= 0x00000008;
           midiFileDirectory_ = other.midiFileDirectory_;
+          bitField0_ |= 0x00000008;
           onChanged();
         }
         if (other.hasGpioLabel()) {
-          bitField0_ |= 0x00000010;
           gpioLabel_ = other.gpioLabel_;
+          bitField0_ |= 0x00000010;
           onChanged();
         }
         if (other.hasControlHostname()) {
-          bitField0_ |= 0x00000020;
           controlHostname_ = other.controlHostname_;
+          bitField0_ |= 0x00000020;
           onChanged();
         }
         if (other.hasControlPort()) {
           setControlPort(other.getControlPort());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -3701,17 +3556,69 @@ public final class Proto {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        org.spcgreenville.deagan.Proto.Config parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                input.readMessage(
+                    getDailyStartTimeFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                input.readMessage(
+                    getDailyEndTimeFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 24: {
+                enableHourCountChime_ = input.readBool();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 24
+              case 34: {
+                midiFileDirectory_ = input.readBytes();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 34
+              case 42: {
+                gpioLabel_ = input.readBytes();
+                bitField0_ |= 0x00000010;
+                break;
+              } // case 42
+              case 50: {
+                controlHostname_ = input.readBytes();
+                bitField0_ |= 0x00000020;
+                break;
+              } // case 50
+              case 56: {
+                controlPort_ = input.readInt32();
+                bitField0_ |= 0x00000040;
+                break;
+              } // case 56
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (org.spcgreenville.deagan.Proto.Config) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
       private int bitField0_;
@@ -3758,11 +3665,11 @@ public final class Proto {
             throw new NullPointerException();
           }
           dailyStartTime_ = value;
-          onChanged();
         } else {
           dailyStartTimeBuilder_.setMessage(value);
         }
         bitField0_ |= 0x00000001;
+        onChanged();
         return this;
       }
       /**
@@ -3776,11 +3683,11 @@ public final class Proto {
           org.spcgreenville.deagan.Proto.LocalTime.Builder builderForValue) {
         if (dailyStartTimeBuilder_ == null) {
           dailyStartTime_ = builderForValue.build();
-          onChanged();
         } else {
           dailyStartTimeBuilder_.setMessage(builderForValue.build());
         }
         bitField0_ |= 0x00000001;
+        onChanged();
         return this;
       }
       /**
@@ -3793,18 +3700,17 @@ public final class Proto {
       public Builder mergeDailyStartTime(org.spcgreenville.deagan.Proto.LocalTime value) {
         if (dailyStartTimeBuilder_ == null) {
           if (((bitField0_ & 0x00000001) != 0) &&
-              dailyStartTime_ != null &&
-              dailyStartTime_ != org.spcgreenville.deagan.Proto.LocalTime.getDefaultInstance()) {
-            dailyStartTime_ =
-              org.spcgreenville.deagan.Proto.LocalTime.newBuilder(dailyStartTime_).mergeFrom(value).buildPartial();
+            dailyStartTime_ != null &&
+            dailyStartTime_ != org.spcgreenville.deagan.Proto.LocalTime.getDefaultInstance()) {
+            getDailyStartTimeBuilder().mergeFrom(value);
           } else {
             dailyStartTime_ = value;
           }
-          onChanged();
         } else {
           dailyStartTimeBuilder_.mergeFrom(value);
         }
         bitField0_ |= 0x00000001;
+        onChanged();
         return this;
       }
       /**
@@ -3815,13 +3721,13 @@ public final class Proto {
        * <code>optional .org.spcgreenville.deagan.LocalTime daily_start_time = 1;</code>
        */
       public Builder clearDailyStartTime() {
-        if (dailyStartTimeBuilder_ == null) {
-          dailyStartTime_ = null;
-          onChanged();
-        } else {
-          dailyStartTimeBuilder_.clear();
-        }
         bitField0_ = (bitField0_ & ~0x00000001);
+        dailyStartTime_ = null;
+        if (dailyStartTimeBuilder_ != null) {
+          dailyStartTimeBuilder_.dispose();
+          dailyStartTimeBuilder_ = null;
+        }
+        onChanged();
         return this;
       }
       /**
@@ -3914,11 +3820,11 @@ public final class Proto {
             throw new NullPointerException();
           }
           dailyEndTime_ = value;
-          onChanged();
         } else {
           dailyEndTimeBuilder_.setMessage(value);
         }
         bitField0_ |= 0x00000002;
+        onChanged();
         return this;
       }
       /**
@@ -3932,11 +3838,11 @@ public final class Proto {
           org.spcgreenville.deagan.Proto.LocalTime.Builder builderForValue) {
         if (dailyEndTimeBuilder_ == null) {
           dailyEndTime_ = builderForValue.build();
-          onChanged();
         } else {
           dailyEndTimeBuilder_.setMessage(builderForValue.build());
         }
         bitField0_ |= 0x00000002;
+        onChanged();
         return this;
       }
       /**
@@ -3949,18 +3855,17 @@ public final class Proto {
       public Builder mergeDailyEndTime(org.spcgreenville.deagan.Proto.LocalTime value) {
         if (dailyEndTimeBuilder_ == null) {
           if (((bitField0_ & 0x00000002) != 0) &&
-              dailyEndTime_ != null &&
-              dailyEndTime_ != org.spcgreenville.deagan.Proto.LocalTime.getDefaultInstance()) {
-            dailyEndTime_ =
-              org.spcgreenville.deagan.Proto.LocalTime.newBuilder(dailyEndTime_).mergeFrom(value).buildPartial();
+            dailyEndTime_ != null &&
+            dailyEndTime_ != org.spcgreenville.deagan.Proto.LocalTime.getDefaultInstance()) {
+            getDailyEndTimeBuilder().mergeFrom(value);
           } else {
             dailyEndTime_ = value;
           }
-          onChanged();
         } else {
           dailyEndTimeBuilder_.mergeFrom(value);
         }
         bitField0_ |= 0x00000002;
+        onChanged();
         return this;
       }
       /**
@@ -3971,13 +3876,13 @@ public final class Proto {
        * <code>optional .org.spcgreenville.deagan.LocalTime daily_end_time = 2;</code>
        */
       public Builder clearDailyEndTime() {
-        if (dailyEndTimeBuilder_ == null) {
-          dailyEndTime_ = null;
-          onChanged();
-        } else {
-          dailyEndTimeBuilder_.clear();
-        }
         bitField0_ = (bitField0_ & ~0x00000002);
+        dailyEndTime_ = null;
+        if (dailyEndTimeBuilder_ != null) {
+          dailyEndTimeBuilder_.dispose();
+          dailyEndTimeBuilder_ = null;
+        }
+        onChanged();
         return this;
       }
       /**
@@ -4063,8 +3968,9 @@ public final class Proto {
        * @return This builder for chaining.
        */
       public Builder setEnableHourCountChime(boolean value) {
-        bitField0_ |= 0x00000004;
+        
         enableHourCountChime_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -4149,11 +4055,9 @@ public final class Proto {
        */
       public Builder setMidiFileDirectory(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000008;
+        if (value == null) { throw new NullPointerException(); }
         midiFileDirectory_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -4166,8 +4070,8 @@ public final class Proto {
        * @return This builder for chaining.
        */
       public Builder clearMidiFileDirectory() {
-        bitField0_ = (bitField0_ & ~0x00000008);
         midiFileDirectory_ = getDefaultInstance().getMidiFileDirectory();
+        bitField0_ = (bitField0_ & ~0x00000008);
         onChanged();
         return this;
       }
@@ -4182,11 +4086,9 @@ public final class Proto {
        */
       public Builder setMidiFileDirectoryBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000008;
+        if (value == null) { throw new NullPointerException(); }
         midiFileDirectory_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -4257,11 +4159,9 @@ public final class Proto {
        */
       public Builder setGpioLabel(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000010;
+        if (value == null) { throw new NullPointerException(); }
         gpioLabel_ = value;
+        bitField0_ |= 0x00000010;
         onChanged();
         return this;
       }
@@ -4274,8 +4174,8 @@ public final class Proto {
        * @return This builder for chaining.
        */
       public Builder clearGpioLabel() {
-        bitField0_ = (bitField0_ & ~0x00000010);
         gpioLabel_ = getDefaultInstance().getGpioLabel();
+        bitField0_ = (bitField0_ & ~0x00000010);
         onChanged();
         return this;
       }
@@ -4290,11 +4190,9 @@ public final class Proto {
        */
       public Builder setGpioLabelBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000010;
+        if (value == null) { throw new NullPointerException(); }
         gpioLabel_ = value;
+        bitField0_ |= 0x00000010;
         onChanged();
         return this;
       }
@@ -4349,11 +4247,9 @@ public final class Proto {
        */
       public Builder setControlHostname(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000020;
+        if (value == null) { throw new NullPointerException(); }
         controlHostname_ = value;
+        bitField0_ |= 0x00000020;
         onChanged();
         return this;
       }
@@ -4362,8 +4258,8 @@ public final class Proto {
        * @return This builder for chaining.
        */
       public Builder clearControlHostname() {
-        bitField0_ = (bitField0_ & ~0x00000020);
         controlHostname_ = getDefaultInstance().getControlHostname();
+        bitField0_ = (bitField0_ & ~0x00000020);
         onChanged();
         return this;
       }
@@ -4374,11 +4270,9 @@ public final class Proto {
        */
       public Builder setControlHostnameBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000020;
+        if (value == null) { throw new NullPointerException(); }
         controlHostname_ = value;
+        bitField0_ |= 0x00000020;
         onChanged();
         return this;
       }
@@ -4406,8 +4300,9 @@ public final class Proto {
        * @return This builder for chaining.
        */
       public Builder setControlPort(int value) {
-        bitField0_ |= 0x00000040;
+        
         controlPort_ = value;
+        bitField0_ |= 0x00000040;
         onChanged();
         return this;
       }
@@ -4454,7 +4349,18 @@ public final class Proto {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new Config(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 

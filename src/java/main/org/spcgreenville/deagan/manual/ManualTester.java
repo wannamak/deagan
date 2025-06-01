@@ -1,15 +1,10 @@
 package org.spcgreenville.deagan.manual;
 
-import com.google.common.base.Preconditions;
 import org.spcgreenville.deagan.logical.RaspberryRelays;
 import org.spcgreenville.deagan.logical.Relay;
 import org.spcgreenville.deagan.logical.Relays;
-import org.spcgreenville.deagan.physical.GPIOChipInfoProvider;
 
 import java.io.IOException;
-import java.nio.file.Path;
-
-import static org.spcgreenville.deagan.physical.GPIOChipInfoProvider.DEFAULT_RASPBERRY_PI_DEVICE_LABEL;
 
 public class ManualTester {
   public static int STRIKE_DELAY_MS = 500;
@@ -70,12 +65,8 @@ public class ManualTester {
   private ChangeRinger changeRinger;
 
   public void run() throws IOException {
-    System.loadLibrary("chimebox");
-    GPIOChipInfoProvider gpioManager = new GPIOChipInfoProvider();
-    Path gpioDevicePath = gpioManager.getDevicePathForLabel(DEFAULT_RASPBERRY_PI_DEVICE_LABEL);
-    Preconditions.checkNotNull(
-        gpioDevicePath, "No device for label " + DEFAULT_RASPBERRY_PI_DEVICE_LABEL);
-    Relays relays = new RaspberryRelays(gpioDevicePath);
+    System.loadLibrary("deagan");
+    Relays relays = new RaspberryRelays();
     relays.initialize();
     String lastCommand = "";
     while (true) {
