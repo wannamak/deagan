@@ -1,5 +1,6 @@
 package org.spcgreenville.deagan.manual;
 
+import com.google.common.base.Preconditions;
 import org.spcgreenville.deagan.Proto;
 import org.spcgreenville.deagan.logical.Notes;
 import org.spcgreenville.deagan.logical.Power;
@@ -11,10 +12,14 @@ import org.spcgreenville.deagan.midi.MidiFileDatabase;
 import org.spcgreenville.deagan.midi.MidiFileSelector;
 import org.spcgreenville.deagan.midi.MidiNotePlayer;
 import org.spcgreenville.deagan.midi.MidiPlayer;
+import org.spcgreenville.deagan.physical.GPIOChipInfoProvider;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.logging.Logger;
+
+import static org.spcgreenville.deagan.physical.GPIOChipInfoProvider.DEFAULT_RASPBERRY_PI_DEVICE_LABEL;
 
 // ./scripts/run.sh chimebox.manual.ManualMidiPlayer 0 0 0
 public class ManualMidiPlayer {
@@ -36,6 +41,10 @@ public class ManualMidiPlayer {
 
   public ManualMidiPlayer() throws IOException {
     this.database = new MidiFileDatabase();
+    GPIOChipInfoProvider gpioManager = new GPIOChipInfoProvider();
+    Path gpioDevicePath = gpioManager.getDevicePathForLabel(DEFAULT_RASPBERRY_PI_DEVICE_LABEL);
+    Preconditions.checkNotNull(
+        gpioDevicePath, "No device for label " + DEFAULT_RASPBERRY_PI_DEVICE_LABEL);
     Relays relays = new RaspberryRelays(); // new TestingRelays();
     relays.initialize();
     this.power = new Power(relays);

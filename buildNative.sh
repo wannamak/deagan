@@ -14,6 +14,18 @@ javac \
   -h $HEADER_OUT_DIR \
   -d $CLASS_OUT_DIR \
   -cp $CLASSPATH \
+  $JAVA_SRC_DIR/GPIOController.java
+
+javac \
+  -h $HEADER_OUT_DIR \
+  -d $CLASS_OUT_DIR \
+  -cp $CLASSPATH \
+  $JAVA_SRC_DIR/GPIOChipInfoProvider.java
+
+javac \
+  -h $HEADER_OUT_DIR \
+  -d $CLASS_OUT_DIR \
+  -cp $CLASSPATH \
   $JAVA_SRC_DIR/SystemManagementBus.java
 
 # Can't figure out how to get libgpiod2.so to load.
@@ -28,5 +40,7 @@ LIBRARY_PATH=libgpiod2 aarch64-linux-gnu-gcc \
   -I/usr/lib/jvm/java-${JAVA_VERSION}-openjdk-amd64/include \
   -I/usr/lib/jvm/java-${JAVA_VERSION}-openjdk-amd64/include/linux \
   $NATIVE_SRC_DIR/${PREFIX}_physical_SystemManagementBus.cpp \
+  $NATIVE_SRC_DIR/${PREFIX}_physical_GPIOController.cpp \
+  $NATIVE_SRC_DIR/${PREFIX}_physical_GPIOChipInfoProvider.cpp \
   libgpiod2/libgpiod.a \
   -o bin/libdeagan.so
