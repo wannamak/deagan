@@ -13,10 +13,6 @@ public class MCP23017Controller {
   private final List<Integer> outputPins;
   private final List<Integer> inputPins;
 
-  // default
-  public static final int FIRST_MCP_23017_EXPANDER_BOARD_DEVICE_ID = 0x27;
-  public static final int SECOND_MCP_23017_EXPANDER_BOARD_DEVICE_ID = 0x28;
-
   private static final int NUM_OUTPUTS = 16;
 
   // https://ww1.microchip.com/downloads/en/devicedoc/20001952c.pdf

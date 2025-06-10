@@ -1,14 +1,11 @@
 package org.spcgreenville.deagan;
 
-import com.google.protobuf.TextFormat;
 import org.spcgreenville.deagan.hourly.ChimeSchedulerThread;
 import org.spcgreenville.deagan.logical.Notes;
 import org.spcgreenville.deagan.logical.RaspberryRelays;
 import org.spcgreenville.deagan.logical.Relays;
 import org.spcgreenville.deagan.midi.MidiFileDatabase;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.Logger;
 
@@ -29,14 +26,8 @@ public class Deagan {
   }
 
   public Deagan(String pathToConfig) throws IOException {
-    Proto.Config.Builder configBuilder = Proto.Config.newBuilder();
-    logger.info("Reading config from " + pathToConfig);
-    try (BufferedReader br = new BufferedReader(new FileReader(pathToConfig))) {
-      TextFormat.merge(br, configBuilder);
-    }
-    this.config = configBuilder.build();
-
-    Relays relays = new RaspberryRelays();
+    this.config = new ConfigReader().readConfig(pathToConfig);
+    Relays relays = new RaspberryRelays(config);
     relays.initialize();
     this.notes = new Notes(relays);
     this.database = new MidiFileDatabase();

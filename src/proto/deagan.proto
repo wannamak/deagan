@@ -49,7 +49,13 @@ message Config {
   // Device label for GPIO controller.  Use "pinctrl-bcm2711" for Raspberry PI.
   optional string gpio_label = 5;
 
+  // Where to listen for commands
   optional string control_hostname = 6;
   optional int32 control_port = 7;
+
+  // I2C address of first MPC23017
+  optional int32 first_mpc_23017_i2c_address = 8;
+  optional int32 second_mpc_23017_i2c_address = 9;
+
 }
 

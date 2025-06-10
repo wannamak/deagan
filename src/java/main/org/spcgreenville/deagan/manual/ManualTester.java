@@ -1,5 +1,7 @@
 package org.spcgreenville.deagan.manual;
 
+import org.spcgreenville.deagan.ConfigReader;
+import org.spcgreenville.deagan.Proto;
 import org.spcgreenville.deagan.logical.RaspberryRelays;
 import org.spcgreenville.deagan.logical.Relay;
 import org.spcgreenville.deagan.logical.Relays;
@@ -7,10 +9,14 @@ import org.spcgreenville.deagan.logical.Relays;
 import java.io.IOException;
 
 public class ManualTester {
-  public static int STRIKE_DELAY_MS = 500;
+  public static int STRIKE_DELAY_MS = 2500;
 
   public static void main(String[] args) throws Exception {
-    new ManualTester().run();
+    if (args.length != 1) {
+      System.err.println("args path_to_config");
+      System.exit(-1);
+    }
+    new ManualTester(args[0]).run();
   }
 
   private class ChangeRinger extends Thread {
@@ -62,11 +68,16 @@ public class ManualTester {
     }
   }
 
+  private Proto.Config config;
   private ChangeRinger changeRinger;
+
+  public ManualTester(String pathToConfig) throws IOException {
+    this.config = new ConfigReader().readConfig(pathToConfig);
+  }
 
   public void run() throws IOException {
     System.loadLibrary("deagan");
-    Relays relays = new RaspberryRelays();
+    Relays relays = new RaspberryRelays(config);
     relays.initialize();
     String lastCommand = "";
     while (true) {

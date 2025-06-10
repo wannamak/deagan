@@ -1,6 +1,8 @@
 #include "org_spcgreenville_deagan_physical_SystemManagementBus.h"
 
+#include <cerrno>
 #include <cstdint>
+#include <cstring>
 
 #include <sys/ioctl.h>
 #include <fcntl.h>
@@ -16,7 +18,11 @@ static inline int i2c_smbus_read_write_byte(int fd, char rw, uint8_t device_regi
   block.command = device_register;
   block.size = I2C_SMBUS_BYTE_DATA;
   block.data = data;
-  return ioctl(fd, I2C_SMBUS, &block);
+  int result = ioctl(fd, I2C_SMBUS, &block);
+  if (result < 0) {
+    printf("ioctl error %d %s\n", errno, strerror(errno));
+  }
+  return result;
 }
 
 JNIEXPORT jint JNICALL Java_org_spcgreenville_deagan_physical_SystemManagementBus_readByteNative(

@@ -15,17 +15,17 @@ public class MCP23017RelayImpl implements Relay {
 
   @Override
   public void close() {
-    controller.set(pin, MCP23017Controller.Value.LOW);
-  }
-
-  @Override
-  public void open() {
     controller.set(pin, MCP23017Controller.Value.HIGH);
   }
 
   @Override
+  public void open() {
+    controller.set(pin, MCP23017Controller.Value.LOW);
+  }
+
+  @Override
   public boolean isClosed() throws IOException {
-    return controller.get(pin) == MCP23017Controller.Value.LOW;
+    return controller.get(pin) == MCP23017Controller.Value.HIGH;
   }
 
   @Override

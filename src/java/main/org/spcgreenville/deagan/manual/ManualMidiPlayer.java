@@ -1,6 +1,7 @@
 package org.spcgreenville.deagan.manual;
 
 import com.google.common.base.Preconditions;
+import org.spcgreenville.deagan.ConfigReader;
 import org.spcgreenville.deagan.Proto;
 import org.spcgreenville.deagan.logical.Notes;
 import org.spcgreenville.deagan.logical.Power;
@@ -19,12 +20,11 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.logging.Logger;
 
-import static org.spcgreenville.deagan.physical.GPIOChipInfoProvider.DEFAULT_RASPBERRY_PI_DEVICE_LABEL;
-
-// ./scripts/run.sh deagan.manual.ManualMidiPlayer 0 0 0
+// ./scripts/run.sh deagan.manual.ManualMidiPlayer config.txt 0 0 0
 public class ManualMidiPlayer {
   private final Logger logger = Logger.getLogger(ManualMidiPlayer.class.getName());
 
+  private final Proto.Config config;
   private final Power power;
   private final Notes notes;
   private final MidiFileDatabase database;
@@ -32,20 +32,22 @@ public class ManualMidiPlayer {
 
   public static void main(String[] args) throws Exception {
     if (args.length != 3) {
-      System.err.println("args file_index chime_phrase transposition");
+      System.err.println("args path_to_config file_index chime_phrase transposition");
       System.exit(-1);
     }
     System.loadLibrary("deagan");
-    new ManualMidiPlayer().run(Integer.parseInt(args[0]), Integer.parseInt(args[1]), Integer.parseInt(args[2]));
+    new ManualMidiPlayer(args[0]).run(Integer.parseInt(args[1]), Integer.parseInt(args[2]), Integer.parseInt(args[3]));
   }
 
-  public ManualMidiPlayer() throws IOException {
+  public ManualMidiPlayer(String pathToConfig) throws IOException {
+    this.config = new ConfigReader().readConfig(pathToConfig);
     this.database = new MidiFileDatabase();
     GPIOChipInfoProvider gpioManager = new GPIOChipInfoProvider();
-    Path gpioDevicePath = gpioManager.getDevicePathForLabel(DEFAULT_RASPBERRY_PI_DEVICE_LABEL);
+    Path gpioDevicePath = gpioManager.getDevicePathForLabel(config.getGpioLabel());
     Preconditions.checkNotNull(
-        gpioDevicePath, "No device for label " + DEFAULT_RASPBERRY_PI_DEVICE_LABEL);
-    Relays relays = new RaspberryRelays(); // new TestingRelays();
+        gpioDevicePath, "No device for label " + config.getGpioLabel());
+
+    Relays relays = new RaspberryRelays(config); // new TestingRelays();
     relays.initialize();
     this.power = new Power(relays);
     this.notes = new Notes(relays);

@@ -1,5 +1,6 @@
 package org.spcgreenville.deagan.logical;
 
+import org.spcgreenville.deagan.Proto;
 import org.spcgreenville.deagan.physical.MCP23017Controller;
 import org.spcgreenville.deagan.physical.MCP23017RelayImpl;
 import org.spcgreenville.deagan.physical.SystemManagementBus;
@@ -11,6 +12,12 @@ import java.util.logging.Logger;
 public class RaspberryRelays extends Relays {
   private static final Logger logger = Logger.getLogger(RaspberryRelays.class.getName());
 
+  private final Proto.Config config;
+
+  public RaspberryRelays(Proto.Config config) {
+    this.config = config;
+  }
+
   @Override
   public void initialize() throws IOException {
     SystemManagementBus bus = new SystemManagementBus();
@@ -21,14 +28,14 @@ public class RaspberryRelays extends Relays {
      */
     MCP23017Controller controller1 =
         new MCP23017Controller(bus,
-            MCP23017Controller.FIRST_MCP_23017_EXPANDER_BOARD_DEVICE_ID,
+            config.getFirstMpc23017I2CAddress(),
             List.of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15),
             List.of());
     controller1.initialize();
 
     MCP23017Controller controller2 =
         new MCP23017Controller(bus,
-            MCP23017Controller.SECOND_MCP_23017_EXPANDER_BOARD_DEVICE_ID,
+            config.getSecondMpc23017I2CAddress(),
             List.of(0, 1, 2, 3, 4, 5),
             List.of(6, 7, 8, 9, 10, 11, 12, 13, 14, 15));
     controller2.initialize();

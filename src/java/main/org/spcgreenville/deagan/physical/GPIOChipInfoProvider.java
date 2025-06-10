@@ -13,8 +13,6 @@ import java.util.stream.Stream;
  * Some manual tools use the default label below.
  */
 public class GPIOChipInfoProvider {
-  public static final String DEFAULT_RASPBERRY_PI_DEVICE_LABEL = "pinctrl-bcm2711";
-
   public static class GPIOChipInfo {
     public final String name;
     public final String label;
