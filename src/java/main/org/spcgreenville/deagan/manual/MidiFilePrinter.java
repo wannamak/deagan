@@ -14,7 +14,7 @@ import javax.sound.midi.SysexMessage;
 import javax.sound.midi.Track;
 import java.io.File;
 
-// ./scripts/run.sh chimebox.manual.MidiFilePrinter 0
+// ./scripts/run.sh deagan.manual.MidiFilePrinter 0
 public class MidiFilePrinter {
   public static void main(String[] args) throws Exception {
     new MidiFilePrinter().run(args[0]);

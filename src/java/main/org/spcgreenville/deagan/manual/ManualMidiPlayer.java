@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 
 import static org.spcgreenville.deagan.physical.GPIOChipInfoProvider.DEFAULT_RASPBERRY_PI_DEVICE_LABEL;
 
-// ./scripts/run.sh chimebox.manual.ManualMidiPlayer 0 0 0
+// ./scripts/run.sh deagan.manual.ManualMidiPlayer 0 0 0
 public class ManualMidiPlayer {
   private final Logger logger = Logger.getLogger(ManualMidiPlayer.class.getName());
 

@@ -1,3 +1,4 @@
+
 #include "org_spcgreenville_deagan_physical_GPIOChipInfoProvider.h"
 
 #include <cstring>
@@ -15,7 +16,7 @@ struct GPIOChipInfo {
   int numLines;
 };
 
-JNIEXPORT jobject JNICALL Java_chimebox_physical_GPIOChipInfoProvider_getGPIOChipInfoInternal(
+JNIEXPORT jobject JNICALL Java_org_spcgreenville_deagan_physical_GPIOChipInfoProvider_getGPIOChipInfoInternal(
     JNIEnv *env, jobject obj, jstring device_path) {
   const char* c_device_path = env->GetStringUTFChars(device_path, 0);
 
@@ -38,7 +39,7 @@ JNIEXPORT jobject JNICALL Java_chimebox_physical_GPIOChipInfoProvider_getGPIOChi
   }
 
   jclass gpioChipInfoClass = env->FindClass(
-      "chimebox/physical/GPIOChipInfoProvider$GPIOChipInfo");
+      "deagan/physical/GPIOChipInfoProvider$GPIOChipInfo");
   if (gpioChipInfoClass == nullptr) {
     printf("Unable to find GPIOChipInfo class\n");
     return nullptr;

@@ -1,10 +1,10 @@
 #!/bin/sh
 
 HEADER_OUT_DIR=src/native
-CLASS_OUT_DIR=bin/production/deagan/physical
+CLASS_OUT_DIR=bin/production
 JAVA_SRC_DIR=src/java/main/org/spcgreenville/deagan/physical
 NATIVE_SRC_DIR=src/native
-CLASSPATH=lib/guava-21.0.jar
+CLASSPATH=lib/guava-21.0.jar:$CLASS_OUT_DIR
 PREFIX=org_spcgreenville_deagan
 JAVA_VERSION=21
 

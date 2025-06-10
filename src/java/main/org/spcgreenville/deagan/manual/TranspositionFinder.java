@@ -15,7 +15,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.logging.Logger;
 
-// ./scripts/run.sh chimebox.manual.TranspositionFinder 0
+// ./scripts/run.sh deagan.manual.TranspositionFinder 0
 public class TranspositionFinder implements MidiPlayerInterface {
   private final Logger logger = Logger.getLogger(TranspositionFinder.class.getName());
 

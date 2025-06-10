@@ -19,9 +19,11 @@
   </target>
 
   <target name="build" depends="proto" >
-    <mkdir dir="${classes-destination}" />
+    <mkdir dir="${classes-destination}/production" />
 
-    <javac includeantruntime="false" srcdir="src/java/main" destdir="${classes-destination}"
+    <javac includeantruntime="false" 
+           srcdir="src/java/main"
+           destdir="${classes-destination}/production"
            debug="on" includes="**/*.java">
       <classpath>
         <path refid="jars" />
@@ -31,7 +33,7 @@
 
   <target name="jar" depends="build">
     <jar destfile="${jars-destination}/deagan.jar"
-    	  basedir="${classes-destination}">
+    	  basedir="${classes-destination}/production">
       <include name="**/*.class" />
     </jar>
   </target>

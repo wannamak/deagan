@@ -16,7 +16,19 @@ struct org_spcgreenville_deagan_gpio_context {
   int pin;
 };
 
-JNIEXPORT jlong JNICALL Java_chimebox_physical_GPIOController_initializeOutput(
+jobject gJava_callback_object;
+jmethodID gJava_callback_method;
+
+
+JNIEXPORT void JNICALL Java_org_spcgreenville_deagan_physical_GPIOController_addEdgeDetectCallback(
+  JNIEnv *env, jobject obj, jobject java_callback_object) {
+  gJava_callback_object = env->NewGlobalRef(java_callback_object);
+  jclass java_callback_class = env->GetObjectClass(java_callback_object);
+  gJava_callback_method =
+      env->GetMethodID(java_callback_class, "onCallback", "(Ljava/lang/Integer;)V");
+}
+
+JNIEXPORT jlong JNICALL Java_org_spcgreenville_deagan_physical_GPIOController_initializeOutput(
     JNIEnv *env, jobject obj, jstring chip_path, jint pin, jboolean is_active_low) {
   struct gpiod_chip *chip;
   const char* c_chip_path = env->GetStringUTFChars(chip_path, 0);
@@ -88,8 +100,8 @@ JNIEXPORT jlong JNICALL Java_chimebox_physical_GPIOController_initializeOutput(
   return (jlong) context;
 }
 
-JNIEXPORT jlong JNICALL Java_chimebox_physical_GPIOController_initializeInput(
-    JNIEnv *env, jobject obj, jstring chip_path, jint pin) {
+JNIEXPORT jlong JNICALL Java_org_spcgreenville_deagan_physical_GPIOController_initializeInput(
+    JNIEnv *env, jobject obj, jstring chip_path, jint pin, jobject java_edge_detector_callback_object) {
   struct gpiod_chip *chip;
   const char* c_chip_path = env->GetStringUTFChars(chip_path, 0);
   chip = gpiod_chip_open(c_chip_path);
@@ -158,7 +170,7 @@ JNIEXPORT jlong JNICALL Java_chimebox_physical_GPIOController_initializeInput(
   return (jlong) context;
 }
 
-JNIEXPORT jint JNICALL Java_chimebox_physical_GPIOController_setInternal(
+JNIEXPORT jint JNICALL Java_org_spcgreenville_deagan_physical_GPIOController_setInternal(
     JNIEnv *env, jobject obj, jlong context_ptr, jboolean is_active) {
   struct org_spcgreenville_deagan_gpio_context *context = (struct org_spcgreenville_deagan_gpio_context *) context_ptr;
 
@@ -171,7 +183,7 @@ JNIEXPORT jint JNICALL Java_chimebox_physical_GPIOController_setInternal(
   return 0;
 }
 
-JNIEXPORT jboolean JNICALL Java_chimebox_physical_GPIOController_getInternal(
+JNIEXPORT jboolean JNICALL Java_org_spcgreenville_deagan_physical_GPIOController_getInternal(
     JNIEnv *env, jobject obj, jlong context_ptr) {
   struct org_spcgreenville_deagan_gpio_context *context = (struct org_spcgreenville_deagan_gpio_context *) context_ptr;
 

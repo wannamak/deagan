@@ -9,18 +9,18 @@ extern "C" {
 #endif
 /*
  * Class:     org_spcgreenville_deagan_physical_SystemManagementBus
- * Method:    readByte
+ * Method:    readByteNative
  * Signature: (II)I
  */
-JNIEXPORT jint JNICALL Java_org_spcgreenville_deagan_physical_SystemManagementBus_readByte
+JNIEXPORT jint JNICALL Java_org_spcgreenville_deagan_physical_SystemManagementBus_readByteNative
   (JNIEnv *, jobject, jint, jint);
 
 /*
  * Class:     org_spcgreenville_deagan_physical_SystemManagementBus
- * Method:    writeByte
+ * Method:    writeByteNative
  * Signature: (III)I
  */
-JNIEXPORT jint JNICALL Java_org_spcgreenville_deagan_physical_SystemManagementBus_writeByte
+JNIEXPORT jint JNICALL Java_org_spcgreenville_deagan_physical_SystemManagementBus_writeByteNative
   (JNIEnv *, jobject, jint, jint, jint);
 
 /*

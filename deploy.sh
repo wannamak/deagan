@@ -1,5 +1,5 @@
 #!/bin/sh
 set -e
 ant
-scp chimebox.jar chimebox:/home/ubuntu/lib/chimebox.jar
-ssh chimebox "sudo systemctl restart chimebox"
+scp -o PreferredAuthentications=password -o PubkeyAuthentication=no deagan.jar deagan@deagan.local:/home/deagan/lib/deagan.jar
+#ssh deagan.local "sudo systemctl restart deagan"

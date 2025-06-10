@@ -1,2 +1,2 @@
 #!/bin/sh
-scp bin/libchimebox.so chimebox:/home/ubuntu/lib
+scp -o PreferredAuthentications=password -o PubkeyAuthentication=no bin/libdeagan.so deagan@deagan.local:/home/deagan/lib
