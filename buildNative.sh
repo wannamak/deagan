@@ -14,6 +14,12 @@ javac \
   -h $HEADER_OUT_DIR \
   -d $CLASS_OUT_DIR \
   -cp $CLASSPATH \
+  $JAVA_SRC_DIR/EdgeDetector.java
+
+javac \
+  -h $HEADER_OUT_DIR \
+  -d $CLASS_OUT_DIR \
+  -cp $CLASSPATH \
   $JAVA_SRC_DIR/GPIOController.java
 
 javac \
@@ -33,12 +39,14 @@ javac \
 #  --verbose \
 LIBRARY_PATH=libgpiod2 aarch64-linux-gnu-gcc \
   -shared \
+  -fPIC \
   -O3 \
   -Ilibgpiod2 \
   -I/usr/include \
   -I/usr/lib/x86_64-linux-gnu/glib-2.0/include \
   -I/usr/lib/jvm/java-${JAVA_VERSION}-openjdk-amd64/include \
   -I/usr/lib/jvm/java-${JAVA_VERSION}-openjdk-amd64/include/linux \
+  $NATIVE_SRC_DIR/${PREFIX}_physical_EdgeDetector.cpp \
   $NATIVE_SRC_DIR/${PREFIX}_physical_SystemManagementBus.cpp \
   $NATIVE_SRC_DIR/${PREFIX}_physical_GPIOController.cpp \
   $NATIVE_SRC_DIR/${PREFIX}_physical_GPIOChipInfoProvider.cpp \

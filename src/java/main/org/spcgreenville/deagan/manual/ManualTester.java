@@ -2,9 +2,11 @@ package org.spcgreenville.deagan.manual;
 
 import org.spcgreenville.deagan.ConfigReader;
 import org.spcgreenville.deagan.Proto;
-import org.spcgreenville.deagan.logical.RaspberryRelays;
+import org.spcgreenville.deagan.logical.Inputs;
+import org.spcgreenville.deagan.logical.Outputs;
 import org.spcgreenville.deagan.logical.Relay;
 import org.spcgreenville.deagan.logical.Relays;
+import org.spcgreenville.deagan.physical.HardwareConfig;
 
 import java.io.IOException;
 
@@ -77,8 +79,13 @@ public class ManualTester {
 
   public void run() throws IOException {
     System.loadLibrary("deagan");
-    Relays relays = new RaspberryRelays(config);
+    
+    HardwareConfig hardwareConfig = new HardwareConfig(config);
+    Relays relays = new Outputs(hardwareConfig);
+    Inputs inputs = new Inputs(config, hardwareConfig);
     relays.initialize();
+    inputs.initialize();
+
     String lastCommand = "";
     while (true) {
       try {

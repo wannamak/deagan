@@ -25,14 +25,6 @@ JNIEXPORT jlong JNICALL Java_org_spcgreenville_deagan_physical_GPIOController_in
 
 /*
  * Class:     org_spcgreenville_deagan_physical_GPIOController
- * Method:    addEdgeDetectCallback
- * Signature: (Lorg/spcgreenville/deagan/physical/EdgeDetectCallback;)V
- */
-JNIEXPORT void JNICALL Java_org_spcgreenville_deagan_physical_GPIOController_addEdgeDetectCallback
-  (JNIEnv *, jobject, jobject);
-
-/*
- * Class:     org_spcgreenville_deagan_physical_GPIOController
  * Method:    setInternal
  * Signature: (JZ)I
  */

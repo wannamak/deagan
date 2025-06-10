@@ -2,11 +2,15 @@ package org.spcgreenville.deagan;
 
 import org.spcgreenville.deagan.hourly.ChimeSchedulerThread;
 import org.spcgreenville.deagan.logical.Notes;
-import org.spcgreenville.deagan.logical.RaspberryRelays;
+import org.spcgreenville.deagan.logical.Outputs;
 import org.spcgreenville.deagan.logical.Relays;
 import org.spcgreenville.deagan.midi.MidiFileDatabase;
+import org.spcgreenville.deagan.physical.HardwareConfig;
+import org.spcgreenville.deagan.physical.MCP23017Controller;
+import org.spcgreenville.deagan.physical.SystemManagementBus;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Logger;
 
 public class Deagan {
@@ -27,7 +31,8 @@ public class Deagan {
 
   public Deagan(String pathToConfig) throws IOException {
     this.config = new ConfigReader().readConfig(pathToConfig);
-    Relays relays = new RaspberryRelays(config);
+    HardwareConfig hardwareConfig = new HardwareConfig(config);
+    Relays relays = new Outputs(hardwareConfig);
     relays.initialize();
     this.notes = new Notes(relays);
     this.database = new MidiFileDatabase();

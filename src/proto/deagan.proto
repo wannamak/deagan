@@ -57,5 +57,7 @@ message Config {
   optional int32 first_mpc_23017_i2c_address = 8;
   optional int32 second_mpc_23017_i2c_address = 9;
 
+  // GPIO pin handling interrupt from second MPC23017
+  optional int32 gpio_interrupt_pin = 10;
 }
 

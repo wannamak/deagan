@@ -26,30 +26,20 @@ public class GPIOController {
   private final Path devicePath;
   private final int logicalPin;
   private final Direction direction;
-  private final EdgeDetectCallback edgeDetectCallback;
   private long context;
 
   public GPIOController(Path devicePath, int logicalPin, Direction direction) {
-    this(devicePath, logicalPin, direction, null);
-  }
-
-  public GPIOController(Path devicePath, int logicalPin, Direction direction,
-      EdgeDetectCallback edgeDetectCallback) {
     this.devicePath = devicePath;
     this.logicalPin = logicalPin;
     this.direction = direction;
-    this.edgeDetectCallback = edgeDetectCallback;
   }
 
   public synchronized void initialize() {
     if (direction == Direction.OUT) {
-      context = initializeOutput(devicePath.toString(), logicalPin, true);
+      context = initializeOutput(devicePath.toString(), logicalPin, false);
     } else {
       Preconditions.checkState(direction == Direction.IN);
       context = initializeInput(devicePath.toString(), logicalPin);
-      if (edgeDetectCallback != null) {
-        addEdgeDetectCallback(edgeDetectCallback);
-      }
     }
     Preconditions.checkState(context != 0);
   }
@@ -60,8 +50,6 @@ public class GPIOController {
   private native long initializeOutput(String devicePath, int pin, boolean isActiveLow);
 
   private native long initializeInput(String devicePath, int pin);
-
-  private native void addEdgeDetectCallback(EdgeDetectCallback edgeDetectCallback);
 
   public synchronized void set(Value value) {
     Preconditions.checkState(direction == Direction.OUT);

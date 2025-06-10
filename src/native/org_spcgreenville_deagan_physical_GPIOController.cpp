@@ -16,18 +16,6 @@ struct org_spcgreenville_deagan_gpio_context {
   int pin;
 };
 
-jobject gJava_callback_object;
-jmethodID gJava_callback_method;
-
-
-JNIEXPORT void JNICALL Java_org_spcgreenville_deagan_physical_GPIOController_addEdgeDetectCallback(
-  JNIEnv *env, jobject obj, jobject java_callback_object) {
-  gJava_callback_object = env->NewGlobalRef(java_callback_object);
-  jclass java_callback_class = env->GetObjectClass(java_callback_object);
-  gJava_callback_method =
-      env->GetMethodID(java_callback_class, "onCallback", "(Ljava/lang/Integer;)V");
-}
-
 JNIEXPORT jlong JNICALL Java_org_spcgreenville_deagan_physical_GPIOController_initializeOutput(
     JNIEnv *env, jobject obj, jstring chip_path, jint pin, jboolean is_active_low) {
   struct gpiod_chip *chip;

@@ -5,7 +5,7 @@ import org.spcgreenville.deagan.ConfigReader;
 import org.spcgreenville.deagan.Proto;
 import org.spcgreenville.deagan.logical.Notes;
 import org.spcgreenville.deagan.logical.Power;
-import org.spcgreenville.deagan.logical.RaspberryRelays;
+import org.spcgreenville.deagan.logical.Outputs;
 import org.spcgreenville.deagan.logical.Relays;
 import org.spcgreenville.deagan.midi.ChimePhrase;
 import org.spcgreenville.deagan.midi.MidiFile;
@@ -14,6 +14,7 @@ import org.spcgreenville.deagan.midi.MidiFileSelector;
 import org.spcgreenville.deagan.midi.MidiNotePlayer;
 import org.spcgreenville.deagan.midi.MidiPlayer;
 import org.spcgreenville.deagan.physical.GPIOChipInfoProvider;
+import org.spcgreenville.deagan.physical.HardwareConfig;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -47,7 +48,8 @@ public class ManualMidiPlayer {
     Preconditions.checkNotNull(
         gpioDevicePath, "No device for label " + config.getGpioLabel());
 
-    Relays relays = new RaspberryRelays(config); // new TestingRelays();
+    HardwareConfig hardwareConfig = new HardwareConfig(config);
+    Relays relays = new Outputs(hardwareConfig); // new TestingRelays();
     relays.initialize();
     this.power = new Power(relays);
     this.notes = new Notes(relays);

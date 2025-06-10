@@ -2795,6 +2795,25 @@ public final class Proto {
      * @return The secondMpc23017I2cAddress.
      */
     int getSecondMpc23017I2CAddress();
+
+    /**
+     * <pre>
+     * GPIO pin handling interrupt from second MPC23017
+     * </pre>
+     *
+     * <code>optional int32 gpio_interrupt_pin = 10;</code>
+     * @return Whether the gpioInterruptPin field is set.
+     */
+    boolean hasGpioInterruptPin();
+    /**
+     * <pre>
+     * GPIO pin handling interrupt from second MPC23017
+     * </pre>
+     *
+     * <code>optional int32 gpio_interrupt_pin = 10;</code>
+     * @return The gpioInterruptPin.
+     */
+    int getGpioInterruptPin();
   }
   /**
    * Protobuf type {@code org.spcgreenville.deagan.Config}
@@ -3191,6 +3210,33 @@ public final class Proto {
       return secondMpc23017I2CAddress_;
     }
 
+    public static final int GPIO_INTERRUPT_PIN_FIELD_NUMBER = 10;
+    private int gpioInterruptPin_ = 0;
+    /**
+     * <pre>
+     * GPIO pin handling interrupt from second MPC23017
+     * </pre>
+     *
+     * <code>optional int32 gpio_interrupt_pin = 10;</code>
+     * @return Whether the gpioInterruptPin field is set.
+     */
+    @java.lang.Override
+    public boolean hasGpioInterruptPin() {
+      return ((bitField0_ & 0x00000200) != 0);
+    }
+    /**
+     * <pre>
+     * GPIO pin handling interrupt from second MPC23017
+     * </pre>
+     *
+     * <code>optional int32 gpio_interrupt_pin = 10;</code>
+     * @return The gpioInterruptPin.
+     */
+    @java.lang.Override
+    public int getGpioInterruptPin() {
+      return gpioInterruptPin_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -3231,6 +3277,9 @@ public final class Proto {
       }
       if (((bitField0_ & 0x00000100) != 0)) {
         output.writeInt32(9, secondMpc23017I2CAddress_);
+      }
+      if (((bitField0_ & 0x00000200) != 0)) {
+        output.writeInt32(10, gpioInterruptPin_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -3273,6 +3322,10 @@ public final class Proto {
       if (((bitField0_ & 0x00000100) != 0)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(9, secondMpc23017I2CAddress_);
+      }
+      if (((bitField0_ & 0x00000200) != 0)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(10, gpioInterruptPin_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -3334,6 +3387,11 @@ public final class Proto {
         if (getSecondMpc23017I2CAddress()
             != other.getSecondMpc23017I2CAddress()) return false;
       }
+      if (hasGpioInterruptPin() != other.hasGpioInterruptPin()) return false;
+      if (hasGpioInterruptPin()) {
+        if (getGpioInterruptPin()
+            != other.getGpioInterruptPin()) return false;
+      }
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
@@ -3381,6 +3439,10 @@ public final class Proto {
       if (hasSecondMpc23017I2CAddress()) {
         hash = (37 * hash) + SECOND_MPC_23017_I2C_ADDRESS_FIELD_NUMBER;
         hash = (53 * hash) + getSecondMpc23017I2CAddress();
+      }
+      if (hasGpioInterruptPin()) {
+        hash = (37 * hash) + GPIO_INTERRUPT_PIN_FIELD_NUMBER;
+        hash = (53 * hash) + getGpioInterruptPin();
       }
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
@@ -3535,6 +3597,7 @@ public final class Proto {
         controlPort_ = 0;
         firstMpc23017I2CAddress_ = 0;
         secondMpc23017I2CAddress_ = 0;
+        gpioInterruptPin_ = 0;
         return this;
       }
 
@@ -3608,6 +3671,10 @@ public final class Proto {
         if (((from_bitField0_ & 0x00000100) != 0)) {
           result.secondMpc23017I2CAddress_ = secondMpc23017I2CAddress_;
           to_bitField0_ |= 0x00000100;
+        }
+        if (((from_bitField0_ & 0x00000200) != 0)) {
+          result.gpioInterruptPin_ = gpioInterruptPin_;
+          to_bitField0_ |= 0x00000200;
         }
         result.bitField0_ |= to_bitField0_;
       }
@@ -3689,6 +3756,9 @@ public final class Proto {
         if (other.hasSecondMpc23017I2CAddress()) {
           setSecondMpc23017I2CAddress(other.getSecondMpc23017I2CAddress());
         }
+        if (other.hasGpioInterruptPin()) {
+          setGpioInterruptPin(other.getGpioInterruptPin());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
@@ -3764,6 +3834,11 @@ public final class Proto {
                 bitField0_ |= 0x00000100;
                 break;
               } // case 72
+              case 80: {
+                gpioInterruptPin_ = input.readInt32();
+                bitField0_ |= 0x00000200;
+                break;
+              } // case 80
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -4594,6 +4669,62 @@ public final class Proto {
         onChanged();
         return this;
       }
+
+      private int gpioInterruptPin_ ;
+      /**
+       * <pre>
+       * GPIO pin handling interrupt from second MPC23017
+       * </pre>
+       *
+       * <code>optional int32 gpio_interrupt_pin = 10;</code>
+       * @return Whether the gpioInterruptPin field is set.
+       */
+      @java.lang.Override
+      public boolean hasGpioInterruptPin() {
+        return ((bitField0_ & 0x00000200) != 0);
+      }
+      /**
+       * <pre>
+       * GPIO pin handling interrupt from second MPC23017
+       * </pre>
+       *
+       * <code>optional int32 gpio_interrupt_pin = 10;</code>
+       * @return The gpioInterruptPin.
+       */
+      @java.lang.Override
+      public int getGpioInterruptPin() {
+        return gpioInterruptPin_;
+      }
+      /**
+       * <pre>
+       * GPIO pin handling interrupt from second MPC23017
+       * </pre>
+       *
+       * <code>optional int32 gpio_interrupt_pin = 10;</code>
+       * @param value The gpioInterruptPin to set.
+       * @return This builder for chaining.
+       */
+      public Builder setGpioInterruptPin(int value) {
+        
+        gpioInterruptPin_ = value;
+        bitField0_ |= 0x00000200;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * GPIO pin handling interrupt from second MPC23017
+       * </pre>
+       *
+       * <code>optional int32 gpio_interrupt_pin = 10;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearGpioInterruptPin() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        gpioInterruptPin_ = 0;
+        onChanged();
+        return this;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -4696,7 +4827,7 @@ public final class Proto {
       "tion_ms\030\007 \001(\005\"T\n\010Response\0220\n\006status\030\001 \001(" +
       "\0162 .org.spcgreenville.deagan.Status\022\026\n\016s" +
       "tatus_message\030\002 \001(\t\"1\n\tLocalTime\022\014\n\004hour" +
-      "\030\001 \001(\r\022\026\n\016minute_of_hour\030\002 \001(\r\"\321\002\n\006Confi" +
+      "\030\001 \001(\r\022\026\n\016minute_of_hour\030\002 \001(\r\"\355\002\n\006Confi" +
       "g\022=\n\020daily_start_time\030\001 \001(\0132#.org.spcgre" +
       "enville.deagan.LocalTime\022;\n\016daily_end_ti" +
       "me\030\002 \001(\0132#.org.spcgreenville.deagan.Loca" +
@@ -4705,10 +4836,11 @@ public final class Proto {
       "l\030\005 \001(\t\022\030\n\020control_hostname\030\006 \001(\t\022\024\n\014con" +
       "trol_port\030\007 \001(\005\022#\n\033first_mpc_23017_i2c_a" +
       "ddress\030\010 \001(\005\022$\n\034second_mpc_23017_i2c_add" +
-      "ress\030\t \001(\005*g\n\006Status\022\022\n\016STATUS_SUCCESS\020\000" +
-      "\022\030\n\024STATUS_NOT_AVAILABLE\020\001\022\027\n\023STATUS_SER" +
-      "VER_ERROR\020\002\022\026\n\022STATUS_BAD_REQUEST\020\003B!\n\030o" +
-      "rg.spcgreenville.deaganB\005Proto"
+      "ress\030\t \001(\005\022\032\n\022gpio_interrupt_pin\030\n \001(\005*g" +
+      "\n\006Status\022\022\n\016STATUS_SUCCESS\020\000\022\030\n\024STATUS_N" +
+      "OT_AVAILABLE\020\001\022\027\n\023STATUS_SERVER_ERROR\020\002\022" +
+      "\026\n\022STATUS_BAD_REQUEST\020\003B!\n\030org.spcgreenv" +
+      "ille.deaganB\005Proto"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -4737,7 +4869,7 @@ public final class Proto {
     internal_static_org_spcgreenville_deagan_Config_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_org_spcgreenville_deagan_Config_descriptor,
-        new java.lang.String[] { "DailyStartTime", "DailyEndTime", "EnableHourCountChime", "MidiFileDirectory", "GpioLabel", "ControlHostname", "ControlPort", "FirstMpc23017I2CAddress", "SecondMpc23017I2CAddress", });
+        new java.lang.String[] { "DailyStartTime", "DailyEndTime", "EnableHourCountChime", "MidiFileDirectory", "GpioLabel", "ControlHostname", "ControlPort", "FirstMpc23017I2CAddress", "SecondMpc23017I2CAddress", "GpioInterruptPin", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

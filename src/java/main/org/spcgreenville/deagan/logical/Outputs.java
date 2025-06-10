@@ -1,6 +1,7 @@
 package org.spcgreenville.deagan.logical;
 
 import org.spcgreenville.deagan.Proto;
+import org.spcgreenville.deagan.physical.HardwareConfig;
 import org.spcgreenville.deagan.physical.MCP23017Controller;
 import org.spcgreenville.deagan.physical.MCP23017RelayImpl;
 import org.spcgreenville.deagan.physical.SystemManagementBus;
@@ -9,37 +10,25 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class RaspberryRelays extends Relays {
-  private static final Logger logger = Logger.getLogger(RaspberryRelays.class.getName());
+public class Outputs extends Relays {
+  private static final Logger logger = Logger.getLogger(Outputs.class.getName());
 
-  private final Proto.Config config;
+  private final HardwareConfig hardwareConfig;
 
-  public RaspberryRelays(Proto.Config config) {
-    this.config = config;
+  public Outputs(HardwareConfig hardwareConfig) {
+    this.hardwareConfig = hardwareConfig;
   }
 
   @Override
   public void initialize() throws IOException {
-    SystemManagementBus bus = new SystemManagementBus();
+    MCP23017Controller controller1 = hardwareConfig.controller1;
+    MCP23017Controller controller2 = hardwareConfig.controller2;
+
     /*
      * We need 20 outputs and 10 inputs.
      * The first controller will be used for 16 outputs.
      * The second controller will be used for 6 outputs (2 extra) and 10 inputs.
      */
-    MCP23017Controller controller1 =
-        new MCP23017Controller(bus,
-            config.getFirstMpc23017I2CAddress(),
-            List.of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15),
-            List.of());
-    controller1.initialize();
-
-    MCP23017Controller controller2 =
-        new MCP23017Controller(bus,
-            config.getSecondMpc23017I2CAddress(),
-            List.of(0, 1, 2, 3, 4, 5),
-            List.of(6, 7, 8, 9, 10, 11, 12, 13, 14, 15));
-    controller2.initialize();
-
     relays = new Relay[]{
         new MCP23017RelayImpl(controller1, 0),
         new MCP23017RelayImpl(controller1, 1),
