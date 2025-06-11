@@ -18,10 +18,10 @@ JNIEXPORT jlong JNICALL Java_org_spcgreenville_deagan_physical_GPIOController_in
 /*
  * Class:     org_spcgreenville_deagan_physical_GPIOController
  * Method:    initializeInput
- * Signature: (Ljava/lang/String;I)J
+ * Signature: (Ljava/lang/String;II)J
  */
 JNIEXPORT jlong JNICALL Java_org_spcgreenville_deagan_physical_GPIOController_initializeInput
-  (JNIEnv *, jobject, jstring, jint);
+  (JNIEnv *, jobject, jstring, jint, jint);
 
 /*
  * Class:     org_spcgreenville_deagan_physical_GPIOController

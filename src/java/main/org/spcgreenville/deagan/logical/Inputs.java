@@ -23,6 +23,12 @@ public class Inputs implements EdgeDetectCallback {
   }
 
   public void initialize() {
+    Preconditions.checkState(config.hasGpioInterruptPin());  // prevents default of 0
+    GPIOInputImpl interruptPin =
+        new GPIOInputImpl(
+            Path.of(config.getGpioDevice()),
+            config.getGpioInterruptPin(),
+            config.getDebouncePeriodUs());
     inputPins = new InputPin[] {
       new MVP23017InputImpl(hardwareConfig.controller2, 6),
       new MVP23017InputImpl(hardwareConfig.controller2, 7),
@@ -34,7 +40,7 @@ public class Inputs implements EdgeDetectCallback {
       new MVP23017InputImpl(hardwareConfig.controller2, 13),
       new MVP23017InputImpl(hardwareConfig.controller2, 14),
       new MVP23017InputImpl(hardwareConfig.controller2, 15),
-      new GPIOInputImpl(Path.of(config.getGpioLabel()), config.getGpioInterruptPin())
+      interruptPin
     };
 
     for (InputPin inputPin : inputPins) {
@@ -42,7 +48,8 @@ public class Inputs implements EdgeDetectCallback {
     }
 
     // starts a new thread to invoke onCallback.
-    int result = new EdgeDetector().beginEdgeDetection(this);
+    int result = new EdgeDetector().beginEdgeDetection(
+        interruptPin.getContext(), this);
     Preconditions.checkState(result == 0, result);
   }
 

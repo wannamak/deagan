@@ -38,6 +38,7 @@ public class MCP23017Controller {
     final int directionRegister;
     final int interruptOnChangePins;
     final int ioConfigurationRegister;
+    final int pullUpConfigRegister;
     final int bitmask;
 
     Pin(int registerBit, int bitmask) {
@@ -46,6 +47,7 @@ public class MCP23017Controller {
       this.directionRegister = MCP23017_IODIRECTION | registerBit;
       this.interruptOnChangePins = MCP23017_GPINTEN | registerBit;
       this.ioConfigurationRegister = MCP23017_IOCON | registerBit;
+      this.pullUpConfigRegister = MCP23017_GPPU | registerBit;
       this.bitmask = bitmask;
     }
 
@@ -128,9 +130,9 @@ public class MCP23017Controller {
     for (int pinNumber = 0; pinNumber < PINS.length; pinNumber++) {
       Pin pin = PINS[pinNumber];
       int value = bus.readByte(deviceId, pin.directionRegister);
-      boolean direction = outputPins.contains(pinNumber) ? false /* output */ : true;
-      Preconditions.checkState(!direction || inputPins.contains(pinNumber));
-      value = pin.update(value, direction);
+      boolean isInput = outputPins.contains(pinNumber) ? false /* output */ : true;
+      Preconditions.checkState(!isInput || inputPins.contains(pinNumber));
+      value = pin.update(value, isInput);
       bus.writeByte(deviceId, pin.directionRegister, value);
     }
   }
@@ -144,6 +146,9 @@ public class MCP23017Controller {
 
       int config = 0b01000000;  // Enables MIRROR so either A or B trigger the interrupt
       bus.writeByte(deviceId, pin.ioConfigurationRegister, config);
+
+      value = bus.readByte(deviceId, pin.pullUpConfigRegister);
+      System.out.println("PULL UP = " + value);
     }
   }
 }

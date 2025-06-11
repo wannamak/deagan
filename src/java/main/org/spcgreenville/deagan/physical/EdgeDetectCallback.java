@@ -6,6 +6,6 @@ public interface EdgeDetectCallback {
     FALLING_EDGE
   }
 
-  void onCallback(EdgeType edgeType, int pin);
+  public void onCallback(EdgeType edgeType, int pin);
 }
 

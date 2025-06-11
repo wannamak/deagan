@@ -2699,32 +2699,32 @@ public final class Proto {
 
     /**
      * <pre>
-     * Device label for GPIO controller.  Use "pinctrl-bcm2711" for Raspberry PI.
+     * Device for GPIO controller.  Use "/dev/gpiochip0" for Raspberry PI.
      * </pre>
      *
-     * <code>optional string gpio_label = 5;</code>
-     * @return Whether the gpioLabel field is set.
+     * <code>optional string gpio_device = 5;</code>
+     * @return Whether the gpioDevice field is set.
      */
-    boolean hasGpioLabel();
+    boolean hasGpioDevice();
     /**
      * <pre>
-     * Device label for GPIO controller.  Use "pinctrl-bcm2711" for Raspberry PI.
+     * Device for GPIO controller.  Use "/dev/gpiochip0" for Raspberry PI.
      * </pre>
      *
-     * <code>optional string gpio_label = 5;</code>
-     * @return The gpioLabel.
+     * <code>optional string gpio_device = 5;</code>
+     * @return The gpioDevice.
      */
-    java.lang.String getGpioLabel();
+    java.lang.String getGpioDevice();
     /**
      * <pre>
-     * Device label for GPIO controller.  Use "pinctrl-bcm2711" for Raspberry PI.
+     * Device for GPIO controller.  Use "/dev/gpiochip0" for Raspberry PI.
      * </pre>
      *
-     * <code>optional string gpio_label = 5;</code>
-     * @return The bytes for gpioLabel.
+     * <code>optional string gpio_device = 5;</code>
+     * @return The bytes for gpioDevice.
      */
     com.google.protobuf.ByteString
-        getGpioLabelBytes();
+        getGpioDeviceBytes();
 
     /**
      * <pre>
@@ -2814,6 +2814,25 @@ public final class Proto {
      * @return The gpioInterruptPin.
      */
     int getGpioInterruptPin();
+
+    /**
+     * <pre>
+     * For input pins, sets the microsecond debounce period
+     * </pre>
+     *
+     * <code>optional int32 debounce_period_us = 11;</code>
+     * @return Whether the debouncePeriodUs field is set.
+     */
+    boolean hasDebouncePeriodUs();
+    /**
+     * <pre>
+     * For input pins, sets the microsecond debounce period
+     * </pre>
+     *
+     * <code>optional int32 debounce_period_us = 11;</code>
+     * @return The debouncePeriodUs.
+     */
+    int getDebouncePeriodUs();
   }
   /**
    * Protobuf type {@code org.spcgreenville.deagan.Config}
@@ -2829,7 +2848,7 @@ public final class Proto {
     }
     private Config() {
       midiFileDirectory_ = "";
-      gpioLabel_ = "";
+      gpioDevice_ = "";
       controlHostname_ = "";
     }
 
@@ -3023,32 +3042,32 @@ public final class Proto {
       }
     }
 
-    public static final int GPIO_LABEL_FIELD_NUMBER = 5;
+    public static final int GPIO_DEVICE_FIELD_NUMBER = 5;
     @SuppressWarnings("serial")
-    private volatile java.lang.Object gpioLabel_ = "";
+    private volatile java.lang.Object gpioDevice_ = "";
     /**
      * <pre>
-     * Device label for GPIO controller.  Use "pinctrl-bcm2711" for Raspberry PI.
+     * Device for GPIO controller.  Use "/dev/gpiochip0" for Raspberry PI.
      * </pre>
      *
-     * <code>optional string gpio_label = 5;</code>
-     * @return Whether the gpioLabel field is set.
+     * <code>optional string gpio_device = 5;</code>
+     * @return Whether the gpioDevice field is set.
      */
     @java.lang.Override
-    public boolean hasGpioLabel() {
+    public boolean hasGpioDevice() {
       return ((bitField0_ & 0x00000010) != 0);
     }
     /**
      * <pre>
-     * Device label for GPIO controller.  Use "pinctrl-bcm2711" for Raspberry PI.
+     * Device for GPIO controller.  Use "/dev/gpiochip0" for Raspberry PI.
      * </pre>
      *
-     * <code>optional string gpio_label = 5;</code>
-     * @return The gpioLabel.
+     * <code>optional string gpio_device = 5;</code>
+     * @return The gpioDevice.
      */
     @java.lang.Override
-    public java.lang.String getGpioLabel() {
-      java.lang.Object ref = gpioLabel_;
+    public java.lang.String getGpioDevice() {
+      java.lang.Object ref = gpioDevice_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
@@ -3056,28 +3075,28 @@ public final class Proto {
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
-          gpioLabel_ = s;
+          gpioDevice_ = s;
         }
         return s;
       }
     }
     /**
      * <pre>
-     * Device label for GPIO controller.  Use "pinctrl-bcm2711" for Raspberry PI.
+     * Device for GPIO controller.  Use "/dev/gpiochip0" for Raspberry PI.
      * </pre>
      *
-     * <code>optional string gpio_label = 5;</code>
-     * @return The bytes for gpioLabel.
+     * <code>optional string gpio_device = 5;</code>
+     * @return The bytes for gpioDevice.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
-        getGpioLabelBytes() {
-      java.lang.Object ref = gpioLabel_;
+        getGpioDeviceBytes() {
+      java.lang.Object ref = gpioDevice_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        gpioLabel_ = b;
+        gpioDevice_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -3237,6 +3256,33 @@ public final class Proto {
       return gpioInterruptPin_;
     }
 
+    public static final int DEBOUNCE_PERIOD_US_FIELD_NUMBER = 11;
+    private int debouncePeriodUs_ = 0;
+    /**
+     * <pre>
+     * For input pins, sets the microsecond debounce period
+     * </pre>
+     *
+     * <code>optional int32 debounce_period_us = 11;</code>
+     * @return Whether the debouncePeriodUs field is set.
+     */
+    @java.lang.Override
+    public boolean hasDebouncePeriodUs() {
+      return ((bitField0_ & 0x00000400) != 0);
+    }
+    /**
+     * <pre>
+     * For input pins, sets the microsecond debounce period
+     * </pre>
+     *
+     * <code>optional int32 debounce_period_us = 11;</code>
+     * @return The debouncePeriodUs.
+     */
+    @java.lang.Override
+    public int getDebouncePeriodUs() {
+      return debouncePeriodUs_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -3264,7 +3310,7 @@ public final class Proto {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 4, midiFileDirectory_);
       }
       if (((bitField0_ & 0x00000010) != 0)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, gpioLabel_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, gpioDevice_);
       }
       if (((bitField0_ & 0x00000020) != 0)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 6, controlHostname_);
@@ -3280,6 +3326,9 @@ public final class Proto {
       }
       if (((bitField0_ & 0x00000200) != 0)) {
         output.writeInt32(10, gpioInterruptPin_);
+      }
+      if (((bitField0_ & 0x00000400) != 0)) {
+        output.writeInt32(11, debouncePeriodUs_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -3306,7 +3355,7 @@ public final class Proto {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, midiFileDirectory_);
       }
       if (((bitField0_ & 0x00000010) != 0)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, gpioLabel_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, gpioDevice_);
       }
       if (((bitField0_ & 0x00000020) != 0)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, controlHostname_);
@@ -3326,6 +3375,10 @@ public final class Proto {
       if (((bitField0_ & 0x00000200) != 0)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(10, gpioInterruptPin_);
+      }
+      if (((bitField0_ & 0x00000400) != 0)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(11, debouncePeriodUs_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -3362,10 +3415,10 @@ public final class Proto {
         if (!getMidiFileDirectory()
             .equals(other.getMidiFileDirectory())) return false;
       }
-      if (hasGpioLabel() != other.hasGpioLabel()) return false;
-      if (hasGpioLabel()) {
-        if (!getGpioLabel()
-            .equals(other.getGpioLabel())) return false;
+      if (hasGpioDevice() != other.hasGpioDevice()) return false;
+      if (hasGpioDevice()) {
+        if (!getGpioDevice()
+            .equals(other.getGpioDevice())) return false;
       }
       if (hasControlHostname() != other.hasControlHostname()) return false;
       if (hasControlHostname()) {
@@ -3391,6 +3444,11 @@ public final class Proto {
       if (hasGpioInterruptPin()) {
         if (getGpioInterruptPin()
             != other.getGpioInterruptPin()) return false;
+      }
+      if (hasDebouncePeriodUs() != other.hasDebouncePeriodUs()) return false;
+      if (hasDebouncePeriodUs()) {
+        if (getDebouncePeriodUs()
+            != other.getDebouncePeriodUs()) return false;
       }
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
@@ -3420,9 +3478,9 @@ public final class Proto {
         hash = (37 * hash) + MIDI_FILE_DIRECTORY_FIELD_NUMBER;
         hash = (53 * hash) + getMidiFileDirectory().hashCode();
       }
-      if (hasGpioLabel()) {
-        hash = (37 * hash) + GPIO_LABEL_FIELD_NUMBER;
-        hash = (53 * hash) + getGpioLabel().hashCode();
+      if (hasGpioDevice()) {
+        hash = (37 * hash) + GPIO_DEVICE_FIELD_NUMBER;
+        hash = (53 * hash) + getGpioDevice().hashCode();
       }
       if (hasControlHostname()) {
         hash = (37 * hash) + CONTROL_HOSTNAME_FIELD_NUMBER;
@@ -3443,6 +3501,10 @@ public final class Proto {
       if (hasGpioInterruptPin()) {
         hash = (37 * hash) + GPIO_INTERRUPT_PIN_FIELD_NUMBER;
         hash = (53 * hash) + getGpioInterruptPin();
+      }
+      if (hasDebouncePeriodUs()) {
+        hash = (37 * hash) + DEBOUNCE_PERIOD_US_FIELD_NUMBER;
+        hash = (53 * hash) + getDebouncePeriodUs();
       }
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
@@ -3592,12 +3654,13 @@ public final class Proto {
         }
         enableHourCountChime_ = false;
         midiFileDirectory_ = "";
-        gpioLabel_ = "";
+        gpioDevice_ = "";
         controlHostname_ = "";
         controlPort_ = 0;
         firstMpc23017I2CAddress_ = 0;
         secondMpc23017I2CAddress_ = 0;
         gpioInterruptPin_ = 0;
+        debouncePeriodUs_ = 0;
         return this;
       }
 
@@ -3653,7 +3716,7 @@ public final class Proto {
           to_bitField0_ |= 0x00000008;
         }
         if (((from_bitField0_ & 0x00000010) != 0)) {
-          result.gpioLabel_ = gpioLabel_;
+          result.gpioDevice_ = gpioDevice_;
           to_bitField0_ |= 0x00000010;
         }
         if (((from_bitField0_ & 0x00000020) != 0)) {
@@ -3675,6 +3738,10 @@ public final class Proto {
         if (((from_bitField0_ & 0x00000200) != 0)) {
           result.gpioInterruptPin_ = gpioInterruptPin_;
           to_bitField0_ |= 0x00000200;
+        }
+        if (((from_bitField0_ & 0x00000400) != 0)) {
+          result.debouncePeriodUs_ = debouncePeriodUs_;
+          to_bitField0_ |= 0x00000400;
         }
         result.bitField0_ |= to_bitField0_;
       }
@@ -3737,8 +3804,8 @@ public final class Proto {
           bitField0_ |= 0x00000008;
           onChanged();
         }
-        if (other.hasGpioLabel()) {
-          gpioLabel_ = other.gpioLabel_;
+        if (other.hasGpioDevice()) {
+          gpioDevice_ = other.gpioDevice_;
           bitField0_ |= 0x00000010;
           onChanged();
         }
@@ -3758,6 +3825,9 @@ public final class Proto {
         }
         if (other.hasGpioInterruptPin()) {
           setGpioInterruptPin(other.getGpioInterruptPin());
+        }
+        if (other.hasDebouncePeriodUs()) {
+          setDebouncePeriodUs(other.getDebouncePeriodUs());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
@@ -3810,7 +3880,7 @@ public final class Proto {
                 break;
               } // case 34
               case 42: {
-                gpioLabel_ = input.readBytes();
+                gpioDevice_ = input.readBytes();
                 bitField0_ |= 0x00000010;
                 break;
               } // case 42
@@ -3839,6 +3909,11 @@ public final class Proto {
                 bitField0_ |= 0x00000200;
                 break;
               } // case 80
+              case 88: {
+                debouncePeriodUs_ = input.readInt32();
+                bitField0_ |= 0x00000400;
+                break;
+              } // case 88
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -4326,34 +4401,34 @@ public final class Proto {
         return this;
       }
 
-      private java.lang.Object gpioLabel_ = "";
+      private java.lang.Object gpioDevice_ = "";
       /**
        * <pre>
-       * Device label for GPIO controller.  Use "pinctrl-bcm2711" for Raspberry PI.
+       * Device for GPIO controller.  Use "/dev/gpiochip0" for Raspberry PI.
        * </pre>
        *
-       * <code>optional string gpio_label = 5;</code>
-       * @return Whether the gpioLabel field is set.
+       * <code>optional string gpio_device = 5;</code>
+       * @return Whether the gpioDevice field is set.
        */
-      public boolean hasGpioLabel() {
+      public boolean hasGpioDevice() {
         return ((bitField0_ & 0x00000010) != 0);
       }
       /**
        * <pre>
-       * Device label for GPIO controller.  Use "pinctrl-bcm2711" for Raspberry PI.
+       * Device for GPIO controller.  Use "/dev/gpiochip0" for Raspberry PI.
        * </pre>
        *
-       * <code>optional string gpio_label = 5;</code>
-       * @return The gpioLabel.
+       * <code>optional string gpio_device = 5;</code>
+       * @return The gpioDevice.
        */
-      public java.lang.String getGpioLabel() {
-        java.lang.Object ref = gpioLabel_;
+      public java.lang.String getGpioDevice() {
+        java.lang.Object ref = gpioDevice_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
-            gpioLabel_ = s;
+            gpioDevice_ = s;
           }
           return s;
         } else {
@@ -4362,20 +4437,20 @@ public final class Proto {
       }
       /**
        * <pre>
-       * Device label for GPIO controller.  Use "pinctrl-bcm2711" for Raspberry PI.
+       * Device for GPIO controller.  Use "/dev/gpiochip0" for Raspberry PI.
        * </pre>
        *
-       * <code>optional string gpio_label = 5;</code>
-       * @return The bytes for gpioLabel.
+       * <code>optional string gpio_device = 5;</code>
+       * @return The bytes for gpioDevice.
        */
       public com.google.protobuf.ByteString
-          getGpioLabelBytes() {
-        java.lang.Object ref = gpioLabel_;
+          getGpioDeviceBytes() {
+        java.lang.Object ref = gpioDevice_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          gpioLabel_ = b;
+          gpioDevice_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
@@ -4383,48 +4458,48 @@ public final class Proto {
       }
       /**
        * <pre>
-       * Device label for GPIO controller.  Use "pinctrl-bcm2711" for Raspberry PI.
+       * Device for GPIO controller.  Use "/dev/gpiochip0" for Raspberry PI.
        * </pre>
        *
-       * <code>optional string gpio_label = 5;</code>
-       * @param value The gpioLabel to set.
+       * <code>optional string gpio_device = 5;</code>
+       * @param value The gpioDevice to set.
        * @return This builder for chaining.
        */
-      public Builder setGpioLabel(
+      public Builder setGpioDevice(
           java.lang.String value) {
         if (value == null) { throw new NullPointerException(); }
-        gpioLabel_ = value;
+        gpioDevice_ = value;
         bitField0_ |= 0x00000010;
         onChanged();
         return this;
       }
       /**
        * <pre>
-       * Device label for GPIO controller.  Use "pinctrl-bcm2711" for Raspberry PI.
+       * Device for GPIO controller.  Use "/dev/gpiochip0" for Raspberry PI.
        * </pre>
        *
-       * <code>optional string gpio_label = 5;</code>
+       * <code>optional string gpio_device = 5;</code>
        * @return This builder for chaining.
        */
-      public Builder clearGpioLabel() {
-        gpioLabel_ = getDefaultInstance().getGpioLabel();
+      public Builder clearGpioDevice() {
+        gpioDevice_ = getDefaultInstance().getGpioDevice();
         bitField0_ = (bitField0_ & ~0x00000010);
         onChanged();
         return this;
       }
       /**
        * <pre>
-       * Device label for GPIO controller.  Use "pinctrl-bcm2711" for Raspberry PI.
+       * Device for GPIO controller.  Use "/dev/gpiochip0" for Raspberry PI.
        * </pre>
        *
-       * <code>optional string gpio_label = 5;</code>
-       * @param value The bytes for gpioLabel to set.
+       * <code>optional string gpio_device = 5;</code>
+       * @param value The bytes for gpioDevice to set.
        * @return This builder for chaining.
        */
-      public Builder setGpioLabelBytes(
+      public Builder setGpioDeviceBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) { throw new NullPointerException(); }
-        gpioLabel_ = value;
+        gpioDevice_ = value;
         bitField0_ |= 0x00000010;
         onChanged();
         return this;
@@ -4725,6 +4800,62 @@ public final class Proto {
         onChanged();
         return this;
       }
+
+      private int debouncePeriodUs_ ;
+      /**
+       * <pre>
+       * For input pins, sets the microsecond debounce period
+       * </pre>
+       *
+       * <code>optional int32 debounce_period_us = 11;</code>
+       * @return Whether the debouncePeriodUs field is set.
+       */
+      @java.lang.Override
+      public boolean hasDebouncePeriodUs() {
+        return ((bitField0_ & 0x00000400) != 0);
+      }
+      /**
+       * <pre>
+       * For input pins, sets the microsecond debounce period
+       * </pre>
+       *
+       * <code>optional int32 debounce_period_us = 11;</code>
+       * @return The debouncePeriodUs.
+       */
+      @java.lang.Override
+      public int getDebouncePeriodUs() {
+        return debouncePeriodUs_;
+      }
+      /**
+       * <pre>
+       * For input pins, sets the microsecond debounce period
+       * </pre>
+       *
+       * <code>optional int32 debounce_period_us = 11;</code>
+       * @param value The debouncePeriodUs to set.
+       * @return This builder for chaining.
+       */
+      public Builder setDebouncePeriodUs(int value) {
+        
+        debouncePeriodUs_ = value;
+        bitField0_ |= 0x00000400;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * For input pins, sets the microsecond debounce period
+       * </pre>
+       *
+       * <code>optional int32 debounce_period_us = 11;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearDebouncePeriodUs() {
+        bitField0_ = (bitField0_ & ~0x00000400);
+        debouncePeriodUs_ = 0;
+        onChanged();
+        return this;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -4827,20 +4958,21 @@ public final class Proto {
       "tion_ms\030\007 \001(\005\"T\n\010Response\0220\n\006status\030\001 \001(" +
       "\0162 .org.spcgreenville.deagan.Status\022\026\n\016s" +
       "tatus_message\030\002 \001(\t\"1\n\tLocalTime\022\014\n\004hour" +
-      "\030\001 \001(\r\022\026\n\016minute_of_hour\030\002 \001(\r\"\355\002\n\006Confi" +
+      "\030\001 \001(\r\022\026\n\016minute_of_hour\030\002 \001(\r\"\212\003\n\006Confi" +
       "g\022=\n\020daily_start_time\030\001 \001(\0132#.org.spcgre" +
       "enville.deagan.LocalTime\022;\n\016daily_end_ti" +
       "me\030\002 \001(\0132#.org.spcgreenville.deagan.Loca" +
       "lTime\022\037\n\027enable_hour_count_chime\030\003 \001(\010\022\033" +
-      "\n\023midi_file_directory\030\004 \001(\t\022\022\n\ngpio_labe" +
-      "l\030\005 \001(\t\022\030\n\020control_hostname\030\006 \001(\t\022\024\n\014con" +
-      "trol_port\030\007 \001(\005\022#\n\033first_mpc_23017_i2c_a" +
-      "ddress\030\010 \001(\005\022$\n\034second_mpc_23017_i2c_add" +
-      "ress\030\t \001(\005\022\032\n\022gpio_interrupt_pin\030\n \001(\005*g" +
-      "\n\006Status\022\022\n\016STATUS_SUCCESS\020\000\022\030\n\024STATUS_N" +
-      "OT_AVAILABLE\020\001\022\027\n\023STATUS_SERVER_ERROR\020\002\022" +
-      "\026\n\022STATUS_BAD_REQUEST\020\003B!\n\030org.spcgreenv" +
-      "ille.deaganB\005Proto"
+      "\n\023midi_file_directory\030\004 \001(\t\022\023\n\013gpio_devi" +
+      "ce\030\005 \001(\t\022\030\n\020control_hostname\030\006 \001(\t\022\024\n\014co" +
+      "ntrol_port\030\007 \001(\005\022#\n\033first_mpc_23017_i2c_" +
+      "address\030\010 \001(\005\022$\n\034second_mpc_23017_i2c_ad" +
+      "dress\030\t \001(\005\022\032\n\022gpio_interrupt_pin\030\n \001(\005\022" +
+      "\032\n\022debounce_period_us\030\013 \001(\005*g\n\006Status\022\022\n" +
+      "\016STATUS_SUCCESS\020\000\022\030\n\024STATUS_NOT_AVAILABL" +
+      "E\020\001\022\027\n\023STATUS_SERVER_ERROR\020\002\022\026\n\022STATUS_B" +
+      "AD_REQUEST\020\003B!\n\030org.spcgreenville.deagan" +
+      "B\005Proto"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -4869,7 +5001,7 @@ public final class Proto {
     internal_static_org_spcgreenville_deagan_Config_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_org_spcgreenville_deagan_Config_descriptor,
-        new java.lang.String[] { "DailyStartTime", "DailyEndTime", "EnableHourCountChime", "MidiFileDirectory", "GpioLabel", "ControlHostname", "ControlPort", "FirstMpc23017I2CAddress", "SecondMpc23017I2CAddress", "GpioInterruptPin", });
+        new java.lang.String[] { "DailyStartTime", "DailyEndTime", "EnableHourCountChime", "MidiFileDirectory", "GpioDevice", "ControlHostname", "ControlPort", "FirstMpc23017I2CAddress", "SecondMpc23017I2CAddress", "GpioInterruptPin", "DebouncePeriodUs", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

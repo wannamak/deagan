@@ -1,5 +1,7 @@
 #include "org_spcgreenville_deagan_physical_EdgeDetector.h"
 
+#include "gpio_context.h"
+
 #include <cstdlib>
 #include <cstring>
 
@@ -8,16 +10,8 @@
 #include <gpiod.h>
 #include <linux/gpio.h>
 
-// https://github.com/Tieske/rpi-gpio/blob/master/source/event_gpio.c
-// https://github.com/Tieske/rpi-gpio/blob/master/source/py_gpio.c
-// py_add_event_detect
-// add_edge_detect (starts thread)
-// add_py_callback
-// add_edge_callback
-
 // new gpio
 // https://github.com/torvalds/linux/blob/master/tools/gpio/gpio-event-mon.c
-
 
 pthread_t threads;
 void *poll_thread(void *arg);
@@ -28,104 +22,46 @@ struct poll_thread_context {
   jobject java_callback_object;
   jmethodID java_callback_method;
   gpiod_line_request* line_request;
-  int num_pins;
-  JNIEnv *env;
+  JavaVM* jvm;
 };
 
 /**
  * Returns 0 on success, 1 on error.
  */
-JNIEXPORT jint JNICALL Java_org_spcgreenville_deagan_physical_Event_beginEdgeDetection(
-  JNIEnv *env, jobject obj, jstring chip_path, jintArray pins, jobject java_callback_object) {
+JNIEXPORT jint JNICALL Java_org_spcgreenville_deagan_physical_EdgeDetector_beginEdgeDetection(
+  JNIEnv *env, jobject obj, jlong gpio_context_long, jobject java_callback_object) {
 
-  poll_thread_context* context = (poll_thread_context*) calloc(1, sizeof(poll_thread_context));
-  context->env = env;
+  poll_thread_context* context = new poll_thread_context;
+
+  env->GetJavaVM(&context->jvm);
+
   context->java_callback_object = env->NewGlobalRef(java_callback_object);
   jclass java_callback_class = env->GetObjectClass(java_callback_object);
   context->java_callback_method =
-      env->GetMethodID(java_callback_class, "onCallback", "(Ljava/lang/Integer;)V");
+      env->GetMethodID(
+          java_callback_class,
+          "onCallback",
+          // javap -s EdgeDetectCallback.class
+          "(Lorg/spcgreenville/deagan/physical/EdgeDetectCallback$EdgeType;I)V");
 
   jclass java_edge_type_class =
       env->FindClass("org/spcgreenville/deagan/physical/EdgeDetectCallback$EdgeType");
   jfieldID rising_field_id = env->GetStaticFieldID(java_edge_type_class,
       "RISING_EDGE", "Lorg/spcgreenville/deagan/physical/EdgeDetectCallback$EdgeType;");
   jfieldID falling_field_id = env->GetStaticFieldID(java_edge_type_class,
-      "FALLOMG_EDGE", "Lorg/spcgreenville/deagan/physical/EdgeDetectCallback$EdgeType;");
+      "FALLING_EDGE", "Lorg/spcgreenville/deagan/physical/EdgeDetectCallback$EdgeType;");
   context->java_edge_type_enum_rising = env->GetStaticObjectField(
       java_edge_type_class, rising_field_id);
   context->java_edge_type_enum_falling = env->GetStaticObjectField(
       java_edge_type_class, falling_field_id);
 
-  struct gpiod_chip *chip;
-  const char* c_chip_path = env->GetStringUTFChars(chip_path, 0);
-  chip = gpiod_chip_open(c_chip_path);
-  if (!chip) {
-    printf("open %s failed: %s\n", c_chip_path, strerror(errno));
-    env->ReleaseStringUTFChars(chip_path, c_chip_path);
-		return 1;
-  }
-  env->ReleaseStringUTFChars(chip_path, c_chip_path);
-
-  struct gpiod_line_settings *settings = gpiod_line_settings_new();
-  if (!settings) {
-    printf("gpiod_line_settings_new failed: %s\n", strerror(errno));
-    gpiod_chip_close(chip);
-    return 1;
-  }
-
-  gpiod_line_settings_set_direction(settings, GPIOD_LINE_DIRECTION_INPUT);
-
-  struct gpiod_line_config *line_cfg = gpiod_line_config_new();
-  if (!line_cfg) {
-    printf("gpiod_line_config_new failed: %s\n", strerror(errno));
-    gpiod_line_settings_free(settings);
-    gpiod_chip_close(chip);
-    return 1;
-  }
-
-  context->num_pins = env->GetArrayLength(pins);
-  unsigned int* native_pins = (unsigned int*)
-      calloc(context->num_pins, sizeof(int));
-  for (int i = 0; i < context->num_pins; i++) {
-    jboolean isCopy_ignore;
-    native_pins[i] = *env->GetIntArrayElements(pins, &isCopy_ignore);
-  }
-  if (gpiod_line_config_add_line_settings(line_cfg, native_pins, context->num_pins, settings)) {
-    printf("gpiod_line_config_add_line_settings failed: %s\n", strerror(errno));
-    gpiod_line_config_free(line_cfg);
-    gpiod_line_settings_free(settings);
-    gpiod_chip_close(chip);
-    free(native_pins);
-    return 1;
-  }
-  free(native_pins);
-
-  struct gpiod_request_config *req_cfg = gpiod_request_config_new();
-  if (!req_cfg) {
-    printf("gpiod_request_config_new failed: %s\n", strerror(errno));
-    gpiod_line_config_free(line_cfg);
-    gpiod_line_settings_free(settings);
-    gpiod_chip_close(chip);
-    return 1;
-  }
-
-  context->line_request =
-      gpiod_chip_request_lines(chip, req_cfg, line_cfg);
-  if (!context->line_request) {
-    printf("gpiod_chip_request_lines failed: %s\n", strerror(errno));
-    gpiod_request_config_free(req_cfg);
-    gpiod_line_config_free(line_cfg);
-    gpiod_line_settings_free(settings);
-    gpiod_chip_close(chip);
-    return 1;
-  }
+  struct org_spcgreenville_deagan_gpio_context *gpio_context =
+      (org_spcgreenville_deagan_gpio_context*) gpio_context_long;
+  context->line_request = gpio_context->line_request;
 
   if (pthread_create(&threads, NULL, poll_thread, (void *)context) != 0) {
     printf("pthread_create failed: %s\n", strerror(errno));
-    gpiod_request_config_free(req_cfg);
-    gpiod_line_config_free(line_cfg);
-    gpiod_line_settings_free(settings);
-    gpiod_chip_close(chip);
+    delete context;
     return 1;
   }
 
@@ -134,13 +70,26 @@ JNIEXPORT jint JNICALL Java_org_spcgreenville_deagan_physical_Event_beginEdgeDet
 
 void *poll_thread(void *arg) {
   poll_thread_context* context = (poll_thread_context*) arg;
+
+  // in the new thread:
+  JNIEnv* env;
+  //JavaVMAttachArgs args;
+  //args.version = JNI_VERSION_1_6; // choose your JNI version
+  //args.name = NULL; // you might want to give the java thread a name
+  //args.group = NULL; // you might want to assign the java thread to a ThreadGroup
+  context->jvm->AttachCurrentThread((void**)&env, NULL);
+
   while (1) {
-    int result = gpiod_line_request_wait_edge_events(context->line_request, -1 /* wait forever */);
+    int result = gpiod_line_request_wait_edge_events(
+        context->line_request,
+        -1 /* wait forever */);
     if (result != 1 /* event pending */) {
-      printf("Unexpect result %d from gpiod_line_request_wait_edge_events: %s", result, strerror(errno));
+      printf("Unexpect result %d from gpiod_line_request_wait_edge_events: %s",
+          result, strerror(errno));
       continue;
     }
-    int default_kernel_size = 16 * context->num_pins;
+
+    int default_kernel_size = 16; // * num_pins
     struct gpiod_edge_event_buffer* edge_event_buffer =
         gpiod_edge_event_buffer_new(default_kernel_size);
 
@@ -163,7 +112,7 @@ void *poll_thread(void *arg) {
           ? context->java_edge_type_enum_rising
           : context->java_edge_type_enum_falling;
 
-      context->env->CallVoidMethod(
+      env->CallVoidMethod(
           context->java_callback_object, context->java_callback_method, edge_type, pin);
     }
     gpiod_edge_event_buffer_free(edge_event_buffer);

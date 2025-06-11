@@ -26,12 +26,15 @@ public class GPIOController {
   private final Path devicePath;
   private final int logicalPin;
   private final Direction direction;
+  private final int debouncePeriodUs;  // input edge detection
   private long context;
 
-  public GPIOController(Path devicePath, int logicalPin, Direction direction) {
+  public GPIOController(Path devicePath,
+      int logicalPin, Direction direction, int debouncePeriodUs) {
     this.devicePath = devicePath;
     this.logicalPin = logicalPin;
     this.direction = direction;
+    this.debouncePeriodUs = debouncePeriodUs;
   }
 
   public synchronized void initialize() {
@@ -39,9 +42,14 @@ public class GPIOController {
       context = initializeOutput(devicePath.toString(), logicalPin, false);
     } else {
       Preconditions.checkState(direction == Direction.IN);
-      context = initializeInput(devicePath.toString(), logicalPin);
+      context = initializeInput(devicePath.toString(), logicalPin, debouncePeriodUs);
     }
     Preconditions.checkState(context != 0);
+  }
+
+  public long getContext() {
+    Preconditions.checkState(context != 0, "Not initialized");
+    return context;
   }
 
   /**
@@ -49,7 +57,7 @@ public class GPIOController {
    */
   private native long initializeOutput(String devicePath, int pin, boolean isActiveLow);
 
-  private native long initializeInput(String devicePath, int pin);
+  private native long initializeInput(String devicePath, int pin, int debouncePeriodUs);
 
   public synchronized void set(Value value) {
     Preconditions.checkState(direction == Direction.OUT);

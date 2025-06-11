@@ -10,10 +10,10 @@ extern "C" {
 /*
  * Class:     org_spcgreenville_deagan_physical_EdgeDetector
  * Method:    beginEdgeDetection
- * Signature: (Lorg/spcgreenville/deagan/physical/EdgeDetectCallback;)I
+ * Signature: (JLorg/spcgreenville/deagan/physical/EdgeDetectCallback;)I
  */
 JNIEXPORT jint JNICALL Java_org_spcgreenville_deagan_physical_EdgeDetector_beginEdgeDetection
-  (JNIEnv *, jobject, jobject);
+  (JNIEnv *, jobject, jlong, jobject);
 
 #ifdef __cplusplus
 }

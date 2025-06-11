@@ -1,5 +1,7 @@
 #include "org_spcgreenville_deagan_physical_GPIOController.h"
 
+#include "gpio_context.h"
+
 #include <cstring>
 #include <string>
 
@@ -9,12 +11,6 @@
 #include <unistd.h>
 #include <sys/ioctl.h>
 #include <linux/gpio.h>
-
-struct org_spcgreenville_deagan_gpio_context {
-  struct gpiod_chip *chip;
-  struct gpiod_line_request *line_request;
-  int pin;
-};
 
 JNIEXPORT jlong JNICALL Java_org_spcgreenville_deagan_physical_GPIOController_initializeOutput(
     JNIEnv *env, jobject obj, jstring chip_path, jint pin, jboolean is_active_low) {
@@ -76,7 +72,8 @@ JNIEXPORT jlong JNICALL Java_org_spcgreenville_deagan_physical_GPIOController_in
   }
 
   // This is never freed.
-  struct org_spcgreenville_deagan_gpio_context *context = new org_spcgreenville_deagan_gpio_context;
+  struct org_spcgreenville_deagan_gpio_context *context =
+      new org_spcgreenville_deagan_gpio_context;
   context->line_request = line_request;
   context->pin = pin;
 
@@ -89,7 +86,7 @@ JNIEXPORT jlong JNICALL Java_org_spcgreenville_deagan_physical_GPIOController_in
 }
 
 JNIEXPORT jlong JNICALL Java_org_spcgreenville_deagan_physical_GPIOController_initializeInput(
-    JNIEnv *env, jobject obj, jstring chip_path, jint pin, jobject java_edge_detector_callback_object) {
+    JNIEnv *env, jobject obj, jstring chip_path, jint pin, jint debounce_period_us) {
   struct gpiod_chip *chip;
   const char* c_chip_path = env->GetStringUTFChars(chip_path, 0);
   chip = gpiod_chip_open(c_chip_path);
@@ -108,6 +105,8 @@ JNIEXPORT jlong JNICALL Java_org_spcgreenville_deagan_physical_GPIOController_in
   }
 
   gpiod_line_settings_set_direction(settings, GPIOD_LINE_DIRECTION_INPUT);
+  gpiod_line_settings_set_edge_detection(settings, GPIOD_LINE_EDGE_BOTH);
+  gpiod_line_settings_set_debounce_period_us(settings, debounce_period_us);
 
   struct gpiod_line_config *line_cfg = gpiod_line_config_new();
   if (!line_cfg) {
@@ -146,7 +145,8 @@ JNIEXPORT jlong JNICALL Java_org_spcgreenville_deagan_physical_GPIOController_in
   }
 
   // This is never freed.
-  struct org_spcgreenville_deagan_gpio_context *context = new org_spcgreenville_deagan_gpio_context;
+  struct org_spcgreenville_deagan_gpio_context *context =
+      new org_spcgreenville_deagan_gpio_context;
   context->line_request = line_request;
   context->pin = pin;
 
@@ -160,7 +160,8 @@ JNIEXPORT jlong JNICALL Java_org_spcgreenville_deagan_physical_GPIOController_in
 
 JNIEXPORT jint JNICALL Java_org_spcgreenville_deagan_physical_GPIOController_setInternal(
     JNIEnv *env, jobject obj, jlong context_ptr, jboolean is_active) {
-  struct org_spcgreenville_deagan_gpio_context *context = (struct org_spcgreenville_deagan_gpio_context *) context_ptr;
+  struct org_spcgreenville_deagan_gpio_context *context =
+      (struct org_spcgreenville_deagan_gpio_context *) context_ptr;
 
   if (gpiod_line_request_set_value(context->line_request, context->pin,
       is_active ? GPIOD_LINE_VALUE_ACTIVE : GPIOD_LINE_VALUE_INACTIVE)) {
@@ -173,7 +174,8 @@ JNIEXPORT jint JNICALL Java_org_spcgreenville_deagan_physical_GPIOController_set
 
 JNIEXPORT jboolean JNICALL Java_org_spcgreenville_deagan_physical_GPIOController_getInternal(
     JNIEnv *env, jobject obj, jlong context_ptr) {
-  struct org_spcgreenville_deagan_gpio_context *context = (struct org_spcgreenville_deagan_gpio_context *) context_ptr;
+  struct org_spcgreenville_deagan_gpio_context *context =
+      (struct org_spcgreenville_deagan_gpio_context *) context_ptr;
 
   enum gpiod_line_value value = gpiod_line_request_get_value(
       context->line_request, context->pin);

@@ -37,10 +37,12 @@ javac \
 # Can't figure out how to get libgpiod2.so to load.
 # For now, link it directly to the JNI shared library.
 #  --verbose \
-LIBRARY_PATH=libgpiod2 aarch64-linux-gnu-gcc \
+#  -O3 \
+LIBRARY_PATH=libgpiod2 \
+  aarch64-linux-gnu-gcc \
   -shared \
+  -g \
   -fPIC \
-  -O3 \
   -Ilibgpiod2 \
   -I/usr/include \
   -I/usr/lib/x86_64-linux-gnu/glib-2.0/include \
@@ -51,4 +53,7 @@ LIBRARY_PATH=libgpiod2 aarch64-linux-gnu-gcc \
   $NATIVE_SRC_DIR/${PREFIX}_physical_GPIOController.cpp \
   $NATIVE_SRC_DIR/${PREFIX}_physical_GPIOChipInfoProvider.cpp \
   libgpiod2/libgpiod.a \
+  -lstdc++ \
   -o bin/libdeagan.so
+
+return $?
